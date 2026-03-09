@@ -1,0 +1,125 @@
+@font-face {
+  font-family: 'TWK Everett';
+  src: url('/fonts/TWKEverett-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TWK Everett Strong';
+  src: url('/fonts/MIIMEverett-strong.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --yellow: #D2FF00;
+  --black: #141414;
+  --white: #F7F7F2;
+  --grey: #141414;
+  --border: #CCCCC4;
+  --dark: #1A1A1A;
+
+  --font: 'TWK Everett', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: 'TWK Everett Strong', 'TWK Everett', 'Helvetica Neue', sans-serif;
+
+  --header-h: 52px;
+  --max: 1440px;
+  --gutter: clamp(20px, 4vw, 60px);
+  --section: clamp(80px, 10vw, 140px);
+  --rule: 1px solid var(--border);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 700;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+/* Type utilities */
+.label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey);
+  font-weight: 700;
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* Layout */
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Ruled line utility */
+.rule {
+  border: none;
+  border-top: var(--rule);
+}
+
+/* Page transition base */
+.page {
+  padding-top: var(--header-h);
+}
+
+/* Object grid */
+.object-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+/* 2-col layout */
+.col-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 100px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .object-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .object-grid {
+    grid-template-columns: 1fr;
+  }
+  .col-2 {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hide-mobile {
+    display: none !important;
+  }
+}
