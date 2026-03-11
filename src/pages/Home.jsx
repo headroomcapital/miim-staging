@@ -8,7 +8,7 @@ const fade = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity
 
 const markStyle = {
   fontFamily: 'var(--font-display)',
-  fontSize: 'clamp(96px, 27vw, 400px)',
+  fontSize: 'clamp(86px, 24.3vw, 360px)',
   fontWeight: 500,
   lineHeight: 0.85,
   letterSpacing: '-0.02em',
