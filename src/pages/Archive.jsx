@@ -50,7 +50,9 @@ export default function Archive() {
             lineHeight: 1.6,
           }}
         >
-          Objects are recorded in order of production. Each receives a fixed number that stays with it over time, across spaces and owners. The archive grows gradually as the series continues.
+          MIIM objects are documented as part of a growing archive.{' '}
+          Each object receives a fixed designation that remains with it across time, spaces, and owners. The archive records the progression of a series — how a single structural idea evolves through variation.{' '}
+          New objects are added gradually as the series develops.
         </motion.p>
       </section>
 

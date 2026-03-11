@@ -74,7 +74,7 @@ export default function Header() {
           MIIM
         </span>
         <span className="label hide-mobile" style={{ color: 'var(--grey)' }}>
-          Objects in series
+          Spatial Harmony
         </span>
       </Link>
 

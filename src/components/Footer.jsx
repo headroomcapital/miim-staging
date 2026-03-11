@@ -14,7 +14,7 @@ export default function Footer() {
         gap: 20,
         alignItems: 'center',
       }}>
-        <span className="label">MIIM — Object Archive</span>
+        <span className="label">MIIM — Spatial Harmony</span>
         <span className="label">Amsterdam, NL</span>
         <a href="mailto:info@miim.nu" className="label" style={{ color: 'var(--grey)', transition: 'color 0.2s' }}
           onMouseEnter={e => e.target.style.color = 'var(--black)'}

@@ -108,7 +108,7 @@ export default function ObjectPage() {
               transition={{ duration: 0.4, delay: 0.1 }}
             >
               <span className="label" style={{ display: 'block', marginBottom: 14 }}>Object Note</span>
-              <p style={{ fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.55, marginBottom: 28 }}>
+              <p style={{ fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.55, marginBottom: 28, whiteSpace: 'pre-line' }}>
                 {object.note}
               </p>
               <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--grey)', maxWidth: 480 }}>
@@ -156,6 +156,7 @@ export default function ObjectPage() {
             <SpecRow label="Dimensions" value={object.dimensions} />
             <SpecRow label="Weight" value={object.weight} />
             <SpecRow label="Materials" value={object.materials} />
+            <SpecRow label="Base Materials" value={object.baseMaterials} />
             <SpecRow label="Status" value={object.status} />
             <SpecRow label="Edition" value={object.edition} />
 

@@ -125,7 +125,37 @@ export default function Home() {
               fontWeight: 700,
             }}
           >
-            MIIM makes objects in series. Each object receives a fixed designation — a number that does not change across time, context, or owner. The series advances through variation, not reinvention. What repeats is as important as what changes.
+            MIIM explores furniture through Spatial Harmony — the relationship between structure, proportion, and the space an object occupies.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            style={{
+              color: 'var(--white)',
+              fontSize: 'clamp(15px, 1.8vw, 20px)',
+              lineHeight: 1.6,
+              marginTop: 28,
+              opacity: 0.75,
+            }}
+          >
+            Rather than designing isolated pieces, objects are developed as part of a series. Each object emerges from the same structural idea while varying in dimension, surface, and scale.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            style={{
+              color: 'var(--white)',
+              fontSize: 'clamp(15px, 1.8vw, 20px)',
+              lineHeight: 1.6,
+              marginTop: 20,
+              opacity: 0.75,
+            }}
+          >
+            This approach reflects what we call Irrational Minimalism: a balance between mathematical clarity and intuitive judgment. Proportions are calculated, but the final object is guided by instinct — producing forms that feel simple, balanced, and inevitable within a space.
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
@@ -183,7 +213,12 @@ export default function Home() {
               color: 'var(--grey)',
               maxWidth: 540,
             }}>
-              Three objects. One structural grammar. A horizontal surface supported by two vertical cylinders. The cylinders remain constant. The surface scales. The series becomes visible only when the three objects are seen together — each one part of a larger relationship.
+              The I-Series studies a single spatial proposition:<br />
+              a horizontal surface supported by two vertical cylinders.<br /><br />
+              The cylinders remain constant.<br />
+              The surface changes in scale and proportion.<br /><br />
+              Individually, each object completes a space.<br />
+              Together, the objects reveal the system behind them.
             </p>
             <div style={{ marginTop: 32 }}>
               <Link

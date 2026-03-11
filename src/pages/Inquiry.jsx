@@ -53,7 +53,8 @@ export default function Inquiry() {
                 : 'Studio Access'}
             </h1>
             <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--grey)', maxWidth: 360, marginBottom: 48 }}>
-              For information about objects, commissions, or collaborations, please contact the studio. All inquiries are reviewed and answered directly.
+              For information about objects, commissions, or collaborations, please contact the studio.{' '}
+              All inquiries are reviewed and answered directly.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>

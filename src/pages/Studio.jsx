@@ -76,7 +76,7 @@ export default function Studio() {
               maxWidth: 820,
             }}
           >
-            MIIM is a studio exploring objects through series. Rather than designing isolated pieces, we work with systems — defining what repeats and what changes across a family of objects.
+            MIIM is a design studio based in Amsterdam exploring furniture through proportion, material, and spatial balance. Objects are developed as part of systems rather than isolated pieces.
           </motion.h1>
         </div>
       </section>
@@ -103,27 +103,27 @@ export default function Studio() {
       }}>
         <Section
           index={0}
-          label="Objects within a system"
-          heading="Each object is part of a series, not a standalone piece."
-          body="We start by defining the system — what stays fixed, and what can vary. The object follows from that logic. This produces work that is related across iterations without being repetitive."
+          label="Spatial Harmony"
+          heading="Furniture should not transform a space — it should complete it."
+          body="MIIM objects are designed to exist in balance with their surroundings. Through proportion, structure, and restraint, they create a sense of spatial harmony."
         />
         <Section
           index={1}
-          label="Beginning with structure"
-          heading="Form comes after the rule, not before it."
-          body="Before anything is drawn, the structural logic is established. What holds what. What scales and what doesn't. The I-Series began with a single proposition: a horizontal surface supported by two vertical cylinders. From that, three objects follow."
+          label="Irrational Minimalism"
+          heading="The studio's approach combines calculation with intuition."
+          body="Dimensions are carefully considered, yet the final object is shaped by instinct. This balance produces forms that feel simple without becoming rigid."
         />
         <Section
           index={2}
-          label="Materials that hold the form"
-          heading="Materials are chosen for how they behave, not what they suggest."
-          body="Brass keeps its geometry over time. Lacquered MDF holds a precise surface. These are the right materials for the I-Series because they perform consistently. Any association with luxury or craft is secondary."
+          label="Built with Respect"
+          heading="Every MIIM object is created with respect for material, craftsmanship, and its future owner."
+          body="Objects are produced using responsibly sourced materials and built to last for generations."
         />
         <Section
           index={3}
-          label="Numbered objects"
-          heading="Each object receives a fixed number that stays with it."
-          body="The number is not a edition marker. It records when an object entered the archive — and that record doesn't change. Object 001 is always 001, regardless of where it is or who has it."
+          label="Materials with Integrity"
+          heading="Materials are chosen for their structural clarity and durability."
+          body="Solid brass maintains precise geometry over time. Lacquered surfaces create a stable spatial plane. Used in their purest form, these materials allow the structure of the object to remain visible."
         />
       </section>
 
