@@ -1,7 +1,8 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import ObjectCard from '../components/ObjectCard'
+import ShapeGrid from '../components/ShapeGrid'
 import objects from '../data/objects'
 
 const fade = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
@@ -17,6 +18,7 @@ const markStyle = {
   display: 'block',
   userSelect: 'none',
 }
+
 
 export default function Home() {
   const heroRef = useRef(null)
@@ -44,9 +46,14 @@ export default function Home() {
           position: 'relative',
           backgroundColor: '#ADADA5',
           overflow: 'hidden',
+          gap: 0,
+          isolation: 'isolate',
         }}
       >
-        <motion.div style={{ scale, opacity, y, width: '100%' }}>
+        {/* Shape wallpaper — edge-to-edge, no gaps */}
+        <ShapeGrid />
+
+        <motion.div style={{ scale, opacity, y, width: '100%', position: 'relative', zIndex: 1 }}>
           <span style={markStyle}>MIIM</span>
         </motion.div>
 
