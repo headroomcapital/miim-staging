@@ -44,7 +44,7 @@ export default function Home() {
           alignItems: 'center',
           justifyContent: 'center',
           position: 'relative',
-          backgroundColor: '#ADADA5',
+          backgroundColor: '#A0A096',
           overflow: 'hidden',
           gap: 0,
           isolation: 'isolate',
