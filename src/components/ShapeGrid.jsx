@@ -57,7 +57,7 @@ function seededRandom(x, y) {
   return n - Math.floor(n)
 }
 
-export default function ShapeGrid({ color = '#002AE5' }) {
+export default function ShapeGrid({ color = '#002AE5', opacity = 1 }) {
   const containerRef = useRef(null)
   const [grid, setGrid] = useState({ cols: 0, rows: 0 })
   const [cells, setCells] = useState({})
@@ -153,6 +153,7 @@ export default function ShapeGrid({ color = '#002AE5' }) {
               key={key}
               viewBox="0 0 360 360"
               fill={color}
+              opacity={opacity}
               style={{ width: SHAPE, height: SHAPE, display: 'block' }}
             >
               {SHAPES[shapeIdx].map((d, j) => (
