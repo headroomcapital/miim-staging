@@ -42,9 +42,13 @@ export default function ObjectPage() {
     )
   }
 
+  const [activeBase, setActiveBase] = useState('steel')
+
   const others = objects.filter(o => o.id !== object.id)
   const activeKey = activeColor ?? object.colors[0].key
-  const heroImage = object.images[activeKey] ?? object.images.hero
+  const hasBrass = !!object.images[`${object.colors[0].key}_brass`]
+  const imageKey = activeBase === 'brass' ? `${activeKey}_brass` : activeKey
+  const heroImage = object.images[imageKey] ?? object.images[activeKey] ?? object.images.hero
 
   return (
     <motion.div {...fade} transition={{ duration: 0.3 }}>
@@ -81,7 +85,7 @@ export default function ObjectPage() {
       {/* ── Hero image ─────────────────────────────────── */}
       <motion.section
         key={heroImage}
-        initial={{ opacity: 0.6 }}
+        initial={{ opacity: 0.7 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
@@ -193,6 +197,39 @@ export default function ObjectPage() {
                 })}
               </div>
             </div>
+
+            {/* Base selector */}
+            {hasBrass && (
+              <div style={{ marginTop: 32 }}>
+                <span className="label" style={{ display: 'block', marginBottom: 16 }}>Base</span>
+                <div style={{ display: 'flex', gap: 0, borderTop: 'var(--rule)' }}>
+                  {['steel', 'brass'].map((base, i) => {
+                    const isActive = activeBase === base
+                    return (
+                      <button
+                        key={base}
+                        onClick={() => setActiveBase(base)}
+                        style={{
+                          flex: 1,
+                          padding: '10px 0',
+                          borderBottom: isActive ? '2px solid var(--black)' : '1px solid var(--border)',
+                          borderRight: i === 0 ? 'var(--rule)' : 'none',
+                          fontSize: 11,
+                          fontWeight: 700,
+                          letterSpacing: '0.1em',
+                          textTransform: 'uppercase',
+                          color: isActive ? 'var(--black)' : 'var(--grey)',
+                          transition: 'color 0.2s',
+                          textAlign: 'center',
+                        }}
+                      >
+                        {base === 'steel' ? 'Steel' : 'Brushed Brass'}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -219,7 +256,7 @@ export default function ObjectPage() {
             onClick={() => setActiveColor(color.key)}
           >
             <img
-              src={object.images[color.key]}
+              src={object.images[activeBase === 'brass' ? `${color.key}_brass` : color.key] ?? object.images[color.key]}
               alt={`${object.name} — ${color.name}`}
               style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }}
               loading="lazy"
