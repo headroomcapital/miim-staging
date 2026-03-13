@@ -148,24 +148,14 @@ export default function ObjectPage() {
             </motion.div>
           </div>
 
-          {/* Right: specs + colors */}
+          {/* Right: colors + base + specs */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15 }}
           >
-            <span className="label" style={{ display: 'block', marginBottom: 4 }}>Specifications</span>
-            <SpecRow label="Series" value={object.series} />
-            <SpecRow label="Year" value={object.year} />
-            <SpecRow label="Dimensions" value={object.dimensions} />
-            <SpecRow label="Weight" value={object.weight} />
-            <SpecRow label="Materials" value={object.materials} />
-            <SpecRow label="Base Materials" value={object.baseMaterials} />
-            <SpecRow label="Status" value={object.status} />
-            <SpecRow label="Edition" value={object.edition} />
-
             {/* Color variants */}
-            <div style={{ marginTop: 40 }}>
+            <div style={{ marginBottom: 32 }}>
               <span className="label" style={{ display: 'block', marginBottom: 16 }}>Color Variants</span>
               <div style={{ display: 'flex', gap: 16 }}>
                 {object.colors.map(color => {
@@ -200,7 +190,7 @@ export default function ObjectPage() {
 
             {/* Base selector */}
             {hasBrass && (
-              <div style={{ marginTop: 32 }}>
+              <div style={{ marginBottom: 40 }}>
                 <span className="label" style={{ display: 'block', marginBottom: 16 }}>Base</span>
                 <div style={{ display: 'flex', gap: 0, borderTop: 'var(--rule)' }}>
                   {['steel', 'brass'].map((base, i) => {
@@ -230,6 +220,17 @@ export default function ObjectPage() {
                 </div>
               </div>
             )}
+
+            {/* Specifications */}
+            <span className="label" style={{ display: 'block', marginBottom: 4 }}>Specifications</span>
+            <SpecRow label="Series" value={object.series} />
+            <SpecRow label="Year" value={object.year} />
+            <SpecRow label="Dimensions" value={object.dimensions} />
+            <SpecRow label="Weight" value={object.weight} />
+            <SpecRow label="Materials" value={object.materials} />
+            <SpecRow label="Base Materials" value={object.baseMaterials} />
+            <SpecRow label="Status" value={object.status} />
+            <SpecRow label="Edition" value={object.edition} />
           </motion.div>
         </div>
       </section>
