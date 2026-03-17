@@ -135,7 +135,7 @@ export default function ShapeGrid({ color = '#002AE5', opacity = 1 }) {
           const key = `${col},${row}`
           next[key] = prev[key] !== undefined
             ? prev[key]
-            : Math.floor(seededRandom(col, row) * SHAPE_COUNT)
+            : Math.floor(Math.random() * SHAPE_COUNT)
         }
       }
       return next
