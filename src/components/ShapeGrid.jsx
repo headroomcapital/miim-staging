@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 
 /* ── 8 MIIM brand shapes (360×360 viewBox paths) ─────── */
 const SHAPES = [
@@ -110,7 +110,6 @@ function ShapeCell({ initialShape, fill }) {
 export default function ShapeGrid({ color = '#002AE5', opacity = 1 }) {
   const containerRef = useRef(null)
   const [grid, setGrid] = useState({ cols: 0, rows: 0 })
-  const [seeds, setSeeds] = useState({})
 
   const measure = useCallback(() => {
     if (!containerRef.current) return
@@ -126,21 +125,17 @@ export default function ShapeGrid({ color = '#002AE5', opacity = 1 }) {
     return () => window.removeEventListener('resize', measure)
   }, [measure])
 
-  useEffect(() => {
-    if (grid.cols === 0) return
-    setSeeds(prev => {
-      const next = {}
-      for (let row = 0; row < grid.rows; row++) {
-        for (let col = 0; col < grid.cols; col++) {
-          const key = `${col},${row}`
-          next[key] = prev[key] !== undefined
-            ? prev[key]
-            : Math.floor(Math.random() * SHAPE_COUNT)
-        }
+  // Computed synchronously in the same render cycle — no timing gap
+  const seeds = useMemo(() => {
+    if (grid.cols === 0) return {}
+    const s = {}
+    for (let row = 0; row < grid.rows; row++) {
+      for (let col = 0; col < grid.cols; col++) {
+        s[`${col},${row}`] = Math.floor(Math.random() * SHAPE_COUNT)
       }
-      return next
-    })
-  }, [grid])
+    }
+    return s
+  }, [grid.cols, grid.rows])
 
   const totalW = grid.cols * SHAPE + (grid.cols - 1) * GAP
   const totalH = grid.rows * SHAPE + (grid.rows - 1) * GAP
