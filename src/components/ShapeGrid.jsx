@@ -43,33 +43,80 @@ const SHAPES = [
 ]
 
 const SHAPE_COUNT = SHAPES.length
-
-const SHAPE = 160 // px — shape size
-const GAP = 72    // px — space between shapes
-const CELL = SHAPE + GAP // total cell stride
-
-function randomIndex(max) {
-  return Math.floor(Math.random() * max)
-}
+const SHAPE = 160
+const GAP   = 72
+const CELL  = SHAPE + GAP
 
 function seededRandom(x, y) {
   const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453
   return n - Math.floor(n)
 }
 
+function randomDiff(exclude) {
+  let idx
+  do { idx = Math.floor(Math.random() * SHAPE_COUNT) } while (idx === exclude && SHAPE_COUNT > 1)
+  return idx
+}
+
+/* ── Single flip-card cell ─────────────────────────────── */
+function ShapeCell({ initialShape, fill }) {
+  const [flipped, setFlipped] = useState(false)
+  const [front, setFront]     = useState(initialShape)
+  const [back, setBack]       = useState(() => randomDiff(initialShape))
+
+  const handleEnter = () => {
+    const shown = flipped ? back : front
+    const nextShape = randomDiff(shown)
+    if (flipped) setFront(nextShape)
+    else         setBack(nextShape)
+    setFlipped(f => !f)
+  }
+
+  const svgStyle = {
+    position: 'absolute',
+    inset: 0,
+    width: SHAPE,
+    height: SHAPE,
+    display: 'block',
+  }
+
+  return (
+    <div
+      onMouseEnter={handleEnter}
+      style={{ width: SHAPE, height: SHAPE, perspective: 700, cursor: 'default' }}
+    >
+      <div style={{
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        transformStyle: 'preserve-3d',
+        transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+        transition: 'transform 0.45s ease',
+      }}>
+        {/* Front */}
+        <svg viewBox="0 0 360 360" fill={fill} style={{ ...svgStyle, backfaceVisibility: 'hidden' }}>
+          {SHAPES[front].map((d, j) => <path key={j} d={d} />)}
+        </svg>
+        {/* Back */}
+        <svg viewBox="0 0 360 360" fill={fill} style={{ ...svgStyle, backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
+          {SHAPES[back].map((d, j) => <path key={j} d={d} />)}
+        </svg>
+      </div>
+    </div>
+  )
+}
+
+/* ── Grid ──────────────────────────────────────────────── */
 export default function ShapeGrid({ color = '#002AE5', opacity = 1 }) {
   const containerRef = useRef(null)
   const [grid, setGrid] = useState({ cols: 0, rows: 0 })
-  const [cells, setCells] = useState({})
+  const [seeds, setSeeds] = useState({})
 
-  // Measure container → compute cols/rows needed (always odd for centering)
   const measure = useCallback(() => {
     if (!containerRef.current) return
     const { offsetWidth: w, offsetHeight: h } = containerRef.current
-    let c = Math.ceil(w / CELL)
-    let r = Math.ceil(h / CELL)
-    if (c % 2 === 0) c++
-    if (r % 2 === 0) r++
+    let c = Math.ceil(w / CELL); if (c % 2 === 0) c++
+    let r = Math.ceil(h / CELL); if (r % 2 === 0) r++
     setGrid(prev => (prev.cols === c && prev.rows === r) ? prev : { cols: c, rows: r })
   }, [])
 
@@ -79,10 +126,9 @@ export default function ShapeGrid({ color = '#002AE5', opacity = 1 }) {
     return () => window.removeEventListener('resize', measure)
   }, [measure])
 
-  // Initialize / expand cells when grid changes — preserve existing
   useEffect(() => {
     if (grid.cols === 0) return
-    setCells(prev => {
+    setSeeds(prev => {
       const next = {}
       for (let row = 0; row < grid.rows; row++) {
         for (let col = 0; col < grid.cols; col++) {
@@ -96,24 +142,6 @@ export default function ShapeGrid({ color = '#002AE5', opacity = 1 }) {
     })
   }, [grid])
 
-  // Every 2s, swap one random cell
-  useEffect(() => {
-    if (grid.cols === 0) return
-    const interval = setInterval(() => {
-      setCells(prev => {
-        const keys = Object.keys(prev)
-        if (keys.length === 0) return prev
-        const key = keys[randomIndex(keys.length)]
-        let newShape = randomIndex(SHAPE_COUNT)
-        while (newShape === prev[key] && SHAPE_COUNT > 1) {
-          newShape = randomIndex(SHAPE_COUNT)
-        }
-        return { ...prev, [key]: newShape }
-      })
-    }, 2000)
-    return () => clearInterval(interval)
-  }, [grid])
-
   const totalW = grid.cols * SHAPE + (grid.cols - 1) * GAP
   const totalH = grid.rows * SHAPE + (grid.rows - 1) * GAP
 
@@ -124,42 +152,29 @@ export default function ShapeGrid({ color = '#002AE5', opacity = 1 }) {
         position: 'absolute',
         inset: 0,
         overflow: 'hidden',
-        pointerEvents: 'none',
         zIndex: 0,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
-      <div
-        style={{
-          width: totalW,
-          height: totalH,
-          flexShrink: 0,
-          display: 'grid',
-          gridTemplateColumns: `repeat(${grid.cols}, ${SHAPE}px)`,
-          gridTemplateRows: `repeat(${grid.rows}, ${SHAPE}px)`,
-          gap: GAP,
-        }}
-      >
+      <div style={{
+        width: totalW,
+        height: totalH,
+        flexShrink: 0,
+        display: 'grid',
+        gridTemplateColumns: `repeat(${grid.cols}, ${SHAPE}px)`,
+        gridTemplateRows:    `repeat(${grid.rows}, ${SHAPE}px)`,
+        gap: GAP,
+        opacity,
+      }}>
         {grid.cols > 0 && Array.from({ length: grid.cols * grid.rows }, (_, i) => {
           const col = i % grid.cols
           const row = Math.floor(i / grid.cols)
           const key = `${col},${row}`
-          const shapeIdx = cells[key] ?? 0
-
+          const initial = seeds[key] ?? 0
           return (
-            <svg
-              key={key}
-              viewBox="0 0 360 360"
-              fill={color}
-              opacity={opacity}
-              style={{ width: SHAPE, height: SHAPE, display: 'block' }}
-            >
-              {SHAPES[shapeIdx].map((d, j) => (
-                <path key={j} d={d} />
-              ))}
-            </svg>
+            <ShapeCell key={key} initialShape={initial} fill={color} />
           )
         })}
       </div>
