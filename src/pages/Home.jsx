@@ -53,7 +53,7 @@ export default function Home() {
         {/* Shape wallpaper — edge-to-edge, no gaps */}
         <ShapeGrid color="#C2C2BA" />
 
-        <motion.div style={{ scale, opacity, y, width: '100%', position: 'relative', zIndex: 1 }}>
+        <motion.div style={{ scale, opacity, y, width: '100%', position: 'relative', zIndex: 1, pointerEvents: 'none' }}>
           <span style={markStyle}>MIIM</span>
         </motion.div>
 
