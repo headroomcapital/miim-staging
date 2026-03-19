@@ -250,7 +250,7 @@ export default function Home() {
         transition={{ duration: 0.7 }}
       >
         <img
-          src="https://miim.nu/wp-content/uploads/2023/10/f099ff247c393229c22a961077204442e0fafa74-2000x1406.jpg"
+          src="/images/miim-i-series-gallery.png"
           alt="MIIM I-Series detail"
           style={{ width: '100%', height: 'auto', display: 'block' }}
           loading="lazy"
