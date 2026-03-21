@@ -250,7 +250,7 @@ export default function Home() {
         transition={{ duration: 0.7 }}
       >
         <img
-          src="/images/miim-i-series-gallery2.png"
+          src="/images/miim-i-series-gallery3.jpg"
           alt="MIIM I-Series detail"
           style={{ width: '100%', height: 'auto', display: 'block' }}
           loading="lazy"
