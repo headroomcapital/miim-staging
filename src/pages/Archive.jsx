@@ -93,12 +93,14 @@ export default function Archive() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-        <img
-          src="https://miim.nu/wp-content/uploads/2023/10/f099ff247c393229c22a961077204442e0fafa74-2000x1406.jpg"
-          alt="MIIM I-Series"
-          style={{ width: '100%', height: 'auto', display: 'block' }}
-          loading="lazy"
-        />
+        <div style={{ overflow: 'hidden' }}>
+          <img
+            src="/images/miim-i-cobalt-brass-home.png"
+            alt="MIIM-I in cobalt with brass base"
+            style={{ width: '100%', display: 'block', marginTop: '-5%' }}
+            loading="lazy"
+          />
+        </div>
       </motion.section>
 
       {/* CTA */}

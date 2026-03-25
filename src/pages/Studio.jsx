@@ -89,8 +89,8 @@ export default function Studio() {
         transition={{ duration: 0.7 }}
       >
         <img
-          src="https://miim.nu/wp-content/uploads/2025/08/miim1-1.jpg"
-          alt="MIIM studio"
+          src="/images/miim-i-cobalt-brass-studio.png"
+          alt="MIIM-I in cobalt with brass base"
           style={{ width: '100%', height: 'auto', display: 'block' }}
         />
       </motion.section>
@@ -126,21 +126,6 @@ export default function Studio() {
           body="Solid brass maintains precise geometry over time. Lacquered surfaces create a stable spatial plane. Used in their purest form, these materials allow the structure of the object to remain visible."
         />
       </section>
-
-      {/* Second image */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-      >
-        <img
-          src="https://miim.nu/wp-content/uploads/2023/10/e8ef286b296160a025cc5457765769fa4b416311-2000x1406.jpg"
-          alt="MIIM object detail"
-          style={{ width: '100%', height: 'auto', display: 'block' }}
-          loading="lazy"
-        />
-      </motion.section>
 
       {/* CTA */}
       <Link to="/archive" style={{ display: 'block' }}>
