@@ -97,7 +97,7 @@ export default function Archive() {
           <img
             src="/images/miim-i-cobalt-brass-home.png"
             alt="MIIM-I in cobalt with brass base"
-            style={{ width: '100%', display: 'block', marginTop: '-5%' }}
+            style={{ width: '100%', display: 'block', marginTop: '-12%' }}
             loading="lazy"
           />
         </div>

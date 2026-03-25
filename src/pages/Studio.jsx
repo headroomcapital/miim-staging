@@ -88,11 +88,13 @@ export default function Studio() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-        <img
-          src="/images/miim-i-cobalt-brass-studio.png"
-          alt="MIIM-I in cobalt with brass base"
-          style={{ width: '100%', height: 'auto', display: 'block' }}
-        />
+        <div style={{ overflow: 'hidden' }}>
+          <img
+            src="/images/miim-i-cobalt-brass-studio.png"
+            alt="MIIM-I in cobalt with brass base"
+            style={{ width: '100%', display: 'block', marginTop: '-12%', marginBottom: '-5%' }}
+          />
+        </div>
       </motion.section>
 
       {/* Four conceptual sections */}
