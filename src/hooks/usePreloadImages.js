@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 
 const RESPONSIVE_IMAGES = {
-  '/images/miim-i-cobalt-brass-studio.png': {
-    widths: [640, 1280, 1920],
-    base: '/images/responsive/miim-i-cobalt-brass-studio',
+  '/images/miim-i-cobalt-brass-library.jpg': {
+    widths: [640, 1280, 1920, 2880],
+    base: '/images/responsive/miim-i-cobalt-brass-library',
   },
   '/images/miim-i-cobalt-brass-canal.jpg': {
     widths: [640, 1280, 1920, 2880],
@@ -18,7 +18,7 @@ const RESPONSIVE_IMAGES = {
 // Map routes to images that should be preloaded
 const ROUTE_IMAGES = {
   '/': ['/images/miim-i-series-group.jpg'],
-  '/studio': ['/images/miim-i-cobalt-brass-studio.png'],
+  '/studio': ['/images/miim-i-cobalt-brass-library.jpg'],
   '/archive': ['/images/miim-i-cobalt-brass-canal.jpg'],
 }
 
