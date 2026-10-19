@@ -279,6 +279,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Feature interior ───────────────────────────── */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+        style={{ borderTop: 'var(--rule)' }}
+      >
+        <ResponsiveImage
+          src="/images/miim-i-plum-brass-insitu-terracotta-cool.jpg"
+          widths={[640, 1280, 1920, 2880]}
+          alt="MIIM-I in plum with brass base in a whitewashed room with terracotta floor"
+          style={{ width: '100%', height: 'auto', display: 'block' }}
+          loading="lazy"
+        />
+        <div style={{ padding: '10px 14px', borderTop: 'var(--rule)', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '4px 16px' }}>
+          <span className="label" style={{ whiteSpace: 'nowrap' }}>MIIM-I · Plum · Brushed Brass</span>
+          <span className="label" style={{ opacity: 0.6 }}>Chairs: Pierre Jeanneret, Chandigarh · Lamp: Isamu Noguchi, Akari</span>
+        </div>
+      </motion.section>
+
       {/* ── CTA ────────────────────────────────────────── */}
       <Link to="/inquiry" style={{ display: 'block' }}>
         <div style={{
