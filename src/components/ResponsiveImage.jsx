@@ -1,7 +1,7 @@
 const RESPONSIVE_IMAGES = {
-  '/images/miim-i-cobalt-brass-library.jpg': {
+  '/images/miim-i-cobalt-brass-library-v2.jpg': {
     widths: [640, 1280, 1920, 2880],
-    base: '/images/responsive/miim-i-cobalt-brass-library',
+    base: '/images/responsive/miim-i-cobalt-brass-library-v2',
   },
   '/images/miim-i-cobalt-brass-canal.jpg': {
     widths: [640, 1280, 1920, 2880],

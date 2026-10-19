@@ -93,7 +93,7 @@ export default function Studio() {
       >
         <div style={{ overflow: 'hidden' }}>
           <ResponsiveImage
-            src="/images/miim-i-cobalt-brass-library.jpg"
+            src="/images/miim-i-cobalt-brass-library-v2.jpg"
             alt="MIIM-I in cobalt with brass base"
             style={{ width: '100%', display: 'block', marginTop: '-12%', marginBottom: '-5%' }}
           />
