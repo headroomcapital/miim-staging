@@ -1,6 +1,7 @@
 import sys; sys.path.insert(0,'.'); from leglib import *
 src,out=sys.argv[1],sys.argv[2]
-COBALT=np.array([20.0,31.5,-50.2]); BRASS=np.array([55.3,4.7,18.4])
+# in-scene targets measured from the original backlit Archive render (studio values look fake here)
+COBALT=np.array([40.2,2.5,-13.0]); BRASS=np.array([38.1,3.5,14.5]); TOP_L_SCALE=0.5
 im=Image.open(src).convert('RGB'); im=im.resize((3072,3072),Image.LANCZOS)
 lab=rgb2lab(np.asarray(im,dtype=np.float32)/255); H_,W_=lab.shape[:2]; L,a,b=lab[...,0],lab[...,1],lab[...,2]; C=np.hypot(a,b)
 top=blur(((b<-22)&(C>22)&(L<55)).astype(np.float32),2)>0.5
@@ -17,7 +18,9 @@ for c in comps:                                   # keep only blobs hanging from
 leg=blur(leg.astype(np.float32),3)>0.5
 mt=blur(top.astype(np.float32),1.5); ml=blur(leg.astype(np.float32),1.5)*(1-mt)
 ct=top&(blur(top.astype(np.float32),3)>0.99); cl=leg&(blur(leg.astype(np.float32),3)>0.99)
-lab2=lab+mt[...,None]*(COBALT-lab[ct].mean(0))     # plain average shift keeps the render's natural shading
+mu=lab[ct].mean(0); new=lab-mu+COBALT
+new[...,0]=COBALT[0]+(lab[...,0]-mu[0])*TOP_L_SCALE          # calm fal's blotchy highlight on the top
+lab2=lab*(1-mt[...,None])+new*mt[...,None]
 lab2=lab2+ml[...,None]*(BRASS-lab2[cl].mean(0))
 res=(np.clip(lab2rgb(lab2),0,1)*255+0.5).astype(np.uint8); Image.fromarray(res).save(out)
 chk=rgb2lab(res.astype(np.float32)/255)
