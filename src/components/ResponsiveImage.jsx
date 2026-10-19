@@ -3,9 +3,9 @@ const RESPONSIVE_IMAGES = {
     widths: [640, 1280, 1920],
     base: '/images/responsive/miim-i-cobalt-brass-studio',
   },
-  '/images/miim-i-cobalt-brass-home.png': {
-    widths: [640, 1280],
-    base: '/images/responsive/miim-i-cobalt-brass-home',
+  '/images/miim-i-cobalt-brass-canal.jpg': {
+    widths: [640, 1280, 1920, 2880],
+    base: '/images/responsive/miim-i-cobalt-brass-canal',
   },
   '/images/miim-i-series-group.jpg': {
     widths: [640, 1280, 1920],
