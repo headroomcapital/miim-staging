@@ -245,21 +245,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Full-width image ───────────────────────────── */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-      >
-        <ResponsiveImage
-          src="/images/miim-i-series-group.jpg"
-          alt="MIIM I-Series detail"
-          style={{ width: '100%', height: 'auto', display: 'block' }}
-          loading="lazy"
-        />
-      </motion.section>
-
       {/* ── In situ gallery ─────────────────────────────── */}
       <section style={{ borderTop: 'var(--rule)' }}>
         <div style={{ padding: '18px var(--gutter)', borderBottom: 'var(--rule)' }}>
@@ -295,6 +280,21 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* ── Full-width image ───────────────────────────── */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+      >
+        <ResponsiveImage
+          src="/images/miim-i-series-group.jpg"
+          alt="MIIM I-Series detail"
+          style={{ width: '100%', height: 'auto', display: 'block' }}
+          loading="lazy"
+        />
+      </motion.section>
 
       {/* ── CTA ────────────────────────────────────────── */}
       <Link to="/inquiry" style={{ display: 'block' }}>
