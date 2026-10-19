@@ -46,7 +46,7 @@ const objects = [
     thumbnail: '/images/miim-i-yellow-steel.jpg',
     inSitu: {
       src: '/images/miim-i-plum-brass-insitu-terracotta.jpg',
-      alt: 'MIIM-I in plum with brass base, in a sunlit room with terracotta floor',
+      alt: 'MIIM-I in plum with brass base in a whitewashed room with terracotta floor',
       caption: 'MIIM-I · Plum · Brushed Brass',
       credit: 'Chairs: Pierre Jeanneret, Chandigarh · Lamp: Isamu Noguchi, Akari',
     },
