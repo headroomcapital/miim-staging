@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import { usePreloadAdjacentRoutes } from './hooks/usePreloadImages'
 import Home from './pages/Home'
 import Studio from './pages/Studio'
 import Archive from './pages/Archive'
@@ -11,6 +12,7 @@ import Inquiry from './pages/Inquiry'
 
 export default function App() {
   const location = useLocation()
+  usePreloadAdjacentRoutes(location.pathname)
 
   return (
     <>

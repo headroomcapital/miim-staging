@@ -1,0 +1,5 @@
+out/
+*.npy
+__pycache__/
+fal_in/
+fal_out/

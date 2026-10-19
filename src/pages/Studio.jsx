@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import ResponsiveImage from '../components/ResponsiveImage'
+import usePreloadImages, { ROUTE_IMAGES } from '../hooks/usePreloadImages'
 
 const fade = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
 
@@ -44,6 +46,7 @@ const Section = ({ label, heading, body, index = 0 }) => (
 )
 
 export default function Studio() {
+  usePreloadImages(ROUTE_IMAGES['/studio'])
   return (
     <motion.div {...fade} transition={{ duration: 0.3 }} className="page">
 
@@ -89,7 +92,7 @@ export default function Studio() {
         transition={{ duration: 0.7 }}
       >
         <div style={{ overflow: 'hidden' }}>
-          <img
+          <ResponsiveImage
             src="/images/miim-i-cobalt-brass-studio.png"
             alt="MIIM-I in cobalt with brass base"
             style={{ width: '100%', display: 'block', marginTop: '-12%', marginBottom: '-5%' }}

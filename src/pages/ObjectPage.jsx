@@ -2,7 +2,8 @@ import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import objects from '../data/objects'
-import ObjectCard from '../components/ObjectCard'
+import ResponsiveImage from '../components/ResponsiveImage'
+
 
 const fade = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
 
@@ -42,12 +43,14 @@ export default function ObjectPage() {
     )
   }
 
-  const [activeBase, setActiveBase] = useState('steel')
+  const bases = object.bases ?? [{ key: 'steel', label: 'Steel' }, { key: 'brass', label: 'Brushed Brass' }]
+  const [activeBase, setActiveBase] = useState(bases[0].key)
+  const baseLabel = bases.find(b => b.key === activeBase)?.label
 
-  const others = objects.filter(o => o.id !== object.id)
   const activeKey = activeColor ?? object.colors[0].key
-  const hasBrass = !!object.images[`${object.colors[0].key}_brass`]
-  const imageKey = activeBase === 'brass' ? `${activeKey}_brass` : activeKey
+  const imgKey = (color, base) => base === bases[0].key ? color : `${color}_${base}`
+  const hasBrass = bases.length > 1 && !!object.images[imgKey(object.colors[0].key, bases[1].key)]
+  const imageKey = imgKey(activeKey, activeBase)
   const heroImage = object.images[imageKey] ?? object.images[activeKey] ?? object.images.hero
 
   return (
@@ -89,11 +92,33 @@ export default function ObjectPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
-        <img
-          src={heroImage}
-          alt={`${object.name} — ${activeKey}`}
-          style={{ width: '100%', height: '70vh', objectFit: 'cover', display: 'block' }}
-        />
+        {/* Wide variant (backdrop extended) fills any screen shape; height never exceeds the
+            original photo's proportion, so cropping only ever removes backdrop, not the table. */}
+        <picture>
+          {/* Portrait screens show the original framing, so they get the regular photo */}
+          <source
+            media="(max-aspect-ratio: 1/1)"
+            type="image/webp"
+            sizes="100vw"
+            srcSet={[640, 1280, 1920].map(w => `${heroImage.replace('/images/', '/images/responsive/').replace(/\.jpg$/, '')}-${w}.webp ${w}w`).join(', ')}
+          />
+          <source
+            type="image/webp"
+            sizes="170vw"
+            srcSet={[1280, 1920, 2880].map(w => `${heroImage.replace('/images/', '/images/responsive/').replace(/\.jpg$/, '')}-wide-${w}.webp ${w}w`).join(', ')}
+          />
+          <img
+            src={heroImage.replace(/\.jpg$/, '-wide.jpg')}
+            alt={`${object.name} — ${activeKey}`}
+            style={{
+              width: '100%',
+              height: 'min(calc(100svh - 160px), calc(100vw / 1.4222))',
+              minHeight: 260,
+              objectFit: 'cover',
+              display: 'block',
+            }}
+          />
+        </picture>
       </motion.section>
 
       {/* ── Dossier body ───────────────────────────────── */}
@@ -193,7 +218,7 @@ export default function ObjectPage() {
               <div style={{ marginBottom: 40 }}>
                 <span className="label" style={{ display: 'block', marginBottom: 16 }}>Base</span>
                 <div style={{ display: 'flex', gap: 0, borderTop: 'var(--rule)' }}>
-                  {['steel', 'brass'].map((base, i) => {
+                  {bases.map(({ key: base, label }, i) => {
                     const isActive = activeBase === base
                     return (
                       <button
@@ -213,7 +238,7 @@ export default function ObjectPage() {
                           textAlign: 'center',
                         }}
                       >
-                        {base === 'steel' ? 'Steel' : 'Brushed Brass'}
+                        {label}
                       </button>
                     )
                   })}
@@ -234,6 +259,121 @@ export default function ObjectPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* ── Detail shots (follow selected color + base) ── */}
+      {object.details && (
+        <section style={{
+          borderTop: 'var(--rule)',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        }}>
+          {object.details.views.map((view, i) => {
+            const color = object.colors.find(c => c.key === activeKey)
+            const src = object.details.src(activeKey, activeBase, view.key)
+            return (
+              <div key={view.key} style={{ borderLeft: i > 0 ? 'var(--rule)' : 'none' }}>
+                <motion.div
+                  key={src}
+                  initial={{ opacity: 0.6 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  <ResponsiveImage
+                    src={src}
+                    widths={[640, 1280, 1920]}
+                    sizes="(max-width: 700px) 100vw, 50vw"
+                    alt={`${object.name} detail, ${view.label.toLowerCase()} — ${color?.name}, ${activeBase}`}
+                    style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }}
+                    loading="lazy"
+                  />
+                </motion.div>
+                <div style={{
+                  padding: '10px 14px',
+                  borderTop: 'var(--rule)',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-between',
+                  gap: '4px 16px',
+                }}>
+                  <span className="label" style={{ whiteSpace: 'nowrap' }}>Detail — {view.label}</span>
+                  <span className="label" style={{ opacity: 0.6, whiteSpace: 'nowrap' }}>
+                    {color?.name} · {baseLabel?.replace('Brushed ', '')}
+                  </span>
+                </div>
+              </div>
+            )
+          })}
+        </section>
+      )}
+
+      {/* ── Dimensions table ───────────────────────────── */}
+      {object.dimensionDetails && (
+        <section style={{
+          borderTop: 'var(--rule)',
+          padding: 'clamp(40px, 5vw, 70px) var(--gutter)',
+        }}>
+          <div style={{
+            maxWidth: 'var(--max)',
+            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: '1fr 2fr',
+            gap: 'clamp(40px, 6vw, 100px)',
+          }}>
+            <div>
+              <span className="label" style={{ display: 'block', marginBottom: 8 }}>
+                Dimensions
+              </span>
+              <p style={{ fontSize: 12, color: 'var(--grey)', lineHeight: 1.6, maxWidth: 220 }}>
+                {object.name} — full dimensional breakdown
+              </p>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.4 }}
+              style={{ maxWidth: 560 }}
+            >
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr auto',
+                paddingBottom: 8,
+                borderBottom: 'var(--rule)',
+              }}>
+                <span className="label">Element</span>
+                <span className="label">Measurement</span>
+              </div>
+              {object.dimensionDetails.map((row, i) => (
+                <motion.div
+                  key={row.label}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: i * 0.04 }}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr auto',
+                    alignItems: 'baseline',
+                    padding: '14px 0',
+                    borderBottom: 'var(--rule)',
+                    gap: 24,
+                  }}
+                >
+                  <span style={{ fontSize: 14, fontWeight: 500 }}>{row.label}</span>
+                  <span style={{
+                    fontSize: 13,
+                    letterSpacing: '0.03em',
+                    color: 'var(--grey)',
+                    fontVariantNumeric: 'tabular-nums',
+                  }}>
+                    {row.value}
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* ── Variant image strip ────────────────────────── */}
       <section style={{
@@ -257,7 +397,7 @@ export default function ObjectPage() {
             onClick={() => setActiveColor(color.key)}
           >
             <img
-              src={object.images[activeBase === 'brass' ? `${color.key}_brass` : color.key] ?? object.images[color.key]}
+              src={object.images[imgKey(color.key, activeBase)] ?? object.images[color.key]}
               alt={`${object.name} — ${color.name}`}
               style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }}
               loading="lazy"
@@ -288,30 +428,6 @@ export default function ObjectPage() {
           </p>
         </div>
       </section>
-
-      {/* ── Other objects ──────────────────────────────── */}
-      {others.length > 0 && (
-        <section>
-          <div style={{
-            maxWidth: 'var(--max)',
-            margin: '0 auto',
-            padding: '20px var(--gutter)',
-            borderBottom: 'var(--rule)',
-          }}>
-            <span className="label">Other Objects in Series</span>
-          </div>
-          <div style={{ maxWidth: 'var(--max)', margin: '0 auto' }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: `repeat(${others.length}, 1fr)`,
-            }}>
-              {others.map((obj, i) => (
-                <ObjectCard key={obj.id} object={obj} index={i} border={i > 0} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
     </motion.div>
   )
