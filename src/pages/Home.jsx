@@ -250,7 +250,7 @@ export default function Home() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
           {[
-            { src: '/images/miim-i-cobalt-brass-insitu-canal-cool.jpg', caption: 'MIIM-I · Cobalt · Brass', credit: 'Wegner CH24 · Louis Poulsen PH5', alt: 'MIIM-I in cobalt and brass in an Amsterdam canal house' },
+            { src: '/images/miim-i-plum-brass-insitu-terracotta-cool.jpg', caption: 'MIIM-I · Plum · Brass', credit: 'Jeanneret Chandigarh · Noguchi Akari', alt: 'MIIM-I in plum with brass base in a whitewashed room with terracotta floor' },
             { src: '/images/miim-i-yellow-steel-insitu-walnut-cool.jpg', caption: 'MIIM-I · Signal Yellow · Steel', credit: 'Perriand Méribel · Flos Arco', alt: 'MIIM-I in signal yellow with steel base in a walnut-panelled room' },
             { src: '/images/miim-ii-cobalt-aluminium-insitu-birch-cool.jpg', caption: 'MIIM-II · Cobalt · Aluminium', credit: 'Aalto Chair 66 · Artek Golden Bell', alt: 'MIIM-II in cobalt with aluminium base in a bright birch-and-oak room' },
           ].map((img, i) => (
@@ -278,27 +278,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* ── Feature interior ───────────────────────────── */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        style={{ borderTop: 'var(--rule)' }}
-      >
-        <ResponsiveImage
-          src="/images/miim-i-plum-brass-insitu-terracotta-cool.jpg"
-          widths={[640, 1280, 1920, 2880]}
-          alt="MIIM-I in plum with brass base in a whitewashed room with terracotta floor"
-          style={{ width: '100%', height: 'auto', display: 'block' }}
-          loading="lazy"
-        />
-        <div style={{ padding: '10px 14px', borderTop: 'var(--rule)', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '4px 16px' }}>
-          <span className="label" style={{ whiteSpace: 'nowrap' }}>MIIM-I · Plum · Brushed Brass</span>
-          <span className="label" style={{ opacity: 0.6 }}>Chairs: Pierre Jeanneret, Chandigarh · Lamp: Isamu Noguchi, Akari</span>
-        </div>
-      </motion.section>
 
       {/* ── CTA ────────────────────────────────────────── */}
       <Link to="/inquiry" style={{ display: 'block' }}>
