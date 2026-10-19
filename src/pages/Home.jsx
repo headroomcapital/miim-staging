@@ -45,14 +45,14 @@ export default function Home() {
           alignItems: 'center',
           justifyContent: 'center',
           position: 'relative',
-          backgroundColor: '#A0A096',
+          backgroundColor: '#A3A09A',
           overflow: 'hidden',
           gap: 0,
           isolation: 'isolate',
         }}
       >
         {/* Shape wallpaper — edge-to-edge, no gaps */}
-        <ShapeGrid color="#C2C2BA" />
+        <ShapeGrid color="#C5C2BC" />
 
         <motion.div style={{ scale, opacity, y, width: '100%', position: 'relative', zIndex: 1, pointerEvents: 'none' }}>
           <span style={markStyle}>MIIM</span>
