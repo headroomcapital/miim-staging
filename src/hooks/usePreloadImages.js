@@ -17,7 +17,7 @@ const RESPONSIVE_IMAGES = {
 
 // Map routes to images that should be preloaded
 const ROUTE_IMAGES = {
-  '/': ['/images/miim-i-series-group.jpg'],
+  '/inquiry': ['/images/miim-i-series-group.jpg'],
   '/studio': ['/images/miim-i-cobalt-brass-library.jpg'],
   '/archive': ['/images/miim-i-cobalt-brass-canal.jpg'],
 }

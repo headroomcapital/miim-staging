@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import ResponsiveImage from '../components/ResponsiveImage'
 
 const fade = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
 
@@ -157,6 +158,22 @@ export default function Inquiry() {
           </motion.div>
         </div>
       </section>
+
+      {/* ── Full-width image ───────────────────────────── */}
+      <motion.section
+        style={{ borderTop: 'var(--rule)' }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+      >
+        <ResponsiveImage
+          src="/images/miim-i-series-group.jpg"
+          alt="Four MIIM-I tables in Stone, Plum, Cobalt and Signal Yellow on steel and brass bases"
+          style={{ width: '100%', height: 'auto', display: 'block' }}
+        />
+      </motion.section>
+
     </motion.div>
   )
 }

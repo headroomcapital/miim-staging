@@ -4,7 +4,6 @@ import { useRef, useState, useEffect } from 'react'
 import ObjectCard from '../components/ObjectCard'
 import ShapeGrid from '../components/ShapeGrid'
 import ResponsiveImage from '../components/ResponsiveImage'
-import usePreloadImages, { ROUTE_IMAGES } from '../hooks/usePreloadImages'
 import objects from '../data/objects'
 
 const fade = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
@@ -23,7 +22,6 @@ const markStyle = {
 
 
 export default function Home() {
-  usePreloadImages(ROUTE_IMAGES['/'])
   const heroRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -280,21 +278,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* ── Full-width image ───────────────────────────── */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-      >
-        <ResponsiveImage
-          src="/images/miim-i-series-group.jpg"
-          alt="MIIM I-Series detail"
-          style={{ width: '100%', height: 'auto', display: 'block' }}
-          loading="lazy"
-        />
-      </motion.section>
 
       {/* ── CTA ────────────────────────────────────────── */}
       <Link to="/inquiry" style={{ display: 'block' }}>
