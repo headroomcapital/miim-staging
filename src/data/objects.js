@@ -45,7 +45,7 @@ const objects = [
     ],
     thumbnail: '/images/miim-i-yellow-steel.jpg',
     inSitu: {
-      src: '/images/miim-i-plum-brass-insitu-terracotta.jpg',
+      src: '/images/miim-i-plum-brass-insitu-terracotta-cool.jpg',
       alt: 'MIIM-I in plum with brass base in a whitewashed room with terracotta floor',
       caption: 'MIIM-I · Plum · Brushed Brass',
       credit: 'Chairs: Pierre Jeanneret, Chandigarh · Lamp: Isamu Noguchi, Akari',
@@ -97,7 +97,7 @@ const objects = [
     },
     thumbnail: '/images/miim-ii-stone-aluminium.jpg',
     inSitu: {
-      src: '/images/miim-ii-plum-brass-insitu-kitchen.jpg',
+      src: '/images/miim-ii-plum-brass-insitu-kitchen-cool.jpg',
       alt: 'MIIM-II in plum with brass base in a kitchen corner with terracotta floor',
       caption: 'MIIM-II · Plum · Brushed Brass',
       credit: 'Chairs: Michael Thonet, No. 14 · Lamp: George Nelson, Bubble',

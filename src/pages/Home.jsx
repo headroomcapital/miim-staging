@@ -252,9 +252,9 @@ export default function Home() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
           {[
-            { src: '/images/miim-i-cobalt-brass-insitu-canal.jpg', caption: 'MIIM-I · Cobalt · Brass', credit: 'Wegner CH24 · Louis Poulsen PH5', alt: 'MIIM-I in cobalt and brass in an Amsterdam canal house' },
-            { src: '/images/miim-i-yellow-steel-insitu-walnut.jpg', caption: 'MIIM-I · Signal Yellow · Steel', credit: 'Perriand Méribel · Flos Arco', alt: 'MIIM-I in signal yellow with steel base in a walnut-panelled room' },
-            { src: '/images/miim-ii-cobalt-aluminium-insitu-birch.jpg', caption: 'MIIM-II · Cobalt · Aluminium', credit: 'Aalto Chair 66 · Artek Golden Bell', alt: 'MIIM-II in cobalt with aluminium base in a bright birch-and-oak room' },
+            { src: '/images/miim-i-cobalt-brass-insitu-canal-cool.jpg', caption: 'MIIM-I · Cobalt · Brass', credit: 'Wegner CH24 · Louis Poulsen PH5', alt: 'MIIM-I in cobalt and brass in an Amsterdam canal house' },
+            { src: '/images/miim-i-yellow-steel-insitu-walnut-cool.jpg', caption: 'MIIM-I · Signal Yellow · Steel', credit: 'Perriand Méribel · Flos Arco', alt: 'MIIM-I in signal yellow with steel base in a walnut-panelled room' },
+            { src: '/images/miim-ii-cobalt-aluminium-insitu-birch-cool.jpg', caption: 'MIIM-II · Cobalt · Aluminium', credit: 'Aalto Chair 66 · Artek Golden Bell', alt: 'MIIM-II in cobalt with aluminium base in a bright birch-and-oak room' },
           ].map((img, i) => (
             <motion.figure
               key={img.src}
