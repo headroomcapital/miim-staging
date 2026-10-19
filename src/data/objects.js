@@ -98,7 +98,7 @@ const objects = [
     thumbnail: '/images/miim-ii-stone-aluminium.jpg',
     inSitu: {
       src: '/images/miim-ii-plum-brass-insitu-kitchen.jpg',
-      alt: 'MIIM-II in plum with brass base, set for two in a warm kitchen',
+      alt: 'MIIM-II in plum with brass base in a kitchen corner with terracotta floor',
       caption: 'MIIM-II · Plum · Brushed Brass',
       credit: 'Chairs: Michael Thonet, No. 14 · Lamp: George Nelson, Bubble',
     },
