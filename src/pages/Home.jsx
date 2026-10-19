@@ -260,6 +260,42 @@ export default function Home() {
         />
       </motion.section>
 
+      {/* ── In situ gallery ─────────────────────────────── */}
+      <section style={{ borderTop: 'var(--rule)' }}>
+        <div style={{ padding: '18px var(--gutter)', borderBottom: 'var(--rule)' }}>
+          <span className="label">In situ</span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+          {[
+            { src: '/images/miim-i-cobalt-brass-insitu-canal.jpg', caption: 'MIIM-I · Cobalt · Brass', credit: 'Wegner CH24 · Louis Poulsen PH5', alt: 'MIIM-I in cobalt and brass in a sunlit Amsterdam canal house' },
+            { src: '/images/miim-i-yellow-steel-insitu-walnut.jpg', caption: 'MIIM-I · Signal Yellow · Steel', credit: 'Perriand Méribel · Flos Arco', alt: 'MIIM-I in signal yellow with steel base in a walnut-panelled room' },
+            { src: '/images/miim-ii-cobalt-aluminium-insitu-birch.jpg', caption: 'MIIM-II · Cobalt · Aluminium', credit: 'Aalto Chair 66 · Artek Golden Bell', alt: 'MIIM-II in cobalt with aluminium base set for breakfast' },
+          ].map((img, i) => (
+            <motion.figure
+              key={img.src}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.08 }}
+              style={{ margin: 0, borderLeft: i > 0 ? 'var(--rule)' : 'none' }}
+            >
+              <ResponsiveImage
+                src={img.src}
+                widths={[640, 1280, 1920]}
+                sizes="(max-width: 700px) 100vw, 34vw"
+                alt={img.alt}
+                style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', display: 'block' }}
+                loading="lazy"
+              />
+              <figcaption style={{ padding: '10px 14px', borderTop: 'var(--rule)', display: 'flex', flexDirection: 'column', gap: 4 }}>
+                <span className="label">{img.caption}</span>
+                <span className="label" style={{ opacity: 0.6 }}>{img.credit}</span>
+              </figcaption>
+            </motion.figure>
+          ))}
+        </div>
+      </section>
+
       {/* ── CTA ────────────────────────────────────────── */}
       <Link to="/inquiry" style={{ display: 'block' }}>
         <div style={{

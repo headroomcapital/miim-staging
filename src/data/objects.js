@@ -44,6 +44,12 @@ const objects = [
       { key: 'brass', label: 'Brushed Brass' },
     ],
     thumbnail: '/images/miim-i-yellow-steel.jpg',
+    inSitu: {
+      src: '/images/miim-i-plum-brass-insitu-terracotta.jpg',
+      alt: 'MIIM-I in plum with brass base, in a sunlit room with terracotta floor',
+      caption: 'MIIM-I · Plum · Brushed Brass',
+      credit: 'Chairs: Pierre Jeanneret, Chandigarh · Lamp: Isamu Noguchi, Akari',
+    },
     details: {
       views: [
         { key: 'frontal', label: 'Frontal' },
@@ -90,6 +96,12 @@ const objects = [
       plum_brass: '/images/miim-ii-plum-brass.jpg',
     },
     thumbnail: '/images/miim-ii-stone-aluminium.jpg',
+    inSitu: {
+      src: '/images/miim-ii-plum-brass-insitu-kitchen.jpg',
+      alt: 'MIIM-II in plum with brass base, set for two in a warm kitchen',
+      caption: 'MIIM-II · Plum · Brushed Brass',
+      credit: 'Chairs: Michael Thonet, No. 14 · Lamp: George Nelson, Bubble',
+    },
     details: {
       views: [
         { key: 'frontal', label: 'Frontal' },

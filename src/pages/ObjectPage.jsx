@@ -306,6 +306,36 @@ export default function ObjectPage() {
         </section>
       )}
 
+      {/* ── In situ ───────────────────────────────────── */}
+      {object.inSitu && (
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          style={{ borderTop: 'var(--rule)' }}
+        >
+          <ResponsiveImage
+            src={object.inSitu.src}
+            widths={[640, 1280, 1920, 2880]}
+            alt={object.inSitu.alt}
+            style={{ width: '100%', aspectRatio: '4 / 3', maxHeight: '92svh', objectFit: 'cover', display: 'block' }}
+            loading="lazy"
+          />
+          <div style={{
+            padding: '10px 14px',
+            borderTop: 'var(--rule)',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            gap: '4px 16px',
+          }}>
+            <span className="label" style={{ whiteSpace: 'nowrap' }}>In situ — {object.inSitu.caption}</span>
+            <span className="label" style={{ opacity: 0.6 }}>{object.inSitu.credit}</span>
+          </div>
+        </motion.section>
+      )}
+
       {/* ── Dimensions table ───────────────────────────── */}
       {object.dimensionDetails && (
         <section style={{
