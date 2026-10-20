@@ -257,8 +257,7 @@ export default function Home() {
           { src: '/images/miim-i-stone-steel-insitu-canal.jpg', caption: 'MIIM-I · Stone · Steel', credit: 'Wegner CH24 · Louis Poulsen PH5', alt: 'MIIM-I in stone with steel base in an Amsterdam canal house' },
           { src: '/images/miim-ii-cobalt-aluminium-insitu-birch-cool.jpg', caption: 'MIIM-II · Cobalt · Aluminium', credit: 'Aalto Chair 66 · Artek Golden Bell', alt: 'MIIM-II in cobalt with aluminium base in a bright birch-and-oak room' },
           { src: '/images/miim-i-yellow-brass-insitu-birch-mvs.jpg', caption: 'MIIM-I · Signal Yellow · Brass', credit: 'Muller Van Severen Alu Chair · Artek Golden Bell', alt: 'MIIM-I in signal yellow with brass base and aluminium chairs before a birch forest' },
-          { src: '/images/miim-i-yellow-steel-insitu-walnut-v2.jpg', caption: 'MIIM-I · Signal Yellow · Steel', credit: 'Perriand Méribel · Flos Arco', alt: 'MIIM-I in signal yellow with steel base in a walnut-panelled room' },
-          { src: '/images/miim-i-yellow-brass-insitu-birch.jpg', caption: 'MIIM-I · Signal Yellow · Brass', credit: 'Aalto Chair 69 · Artek Golden Bell', alt: 'MIIM-I in signal yellow with brass base and birch chairs before a birch forest' },
+          { src: '/images/miim-i-yellow-steel-insitu-walnut-v3.jpg', caption: 'MIIM-I · Signal Yellow · Steel', credit: 'Perriand Méribel · Flos Arco', alt: 'MIIM-I in signal yellow with steel base in a walnut-panelled room' },
         ]} />
       </section>
 
