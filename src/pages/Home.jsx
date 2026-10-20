@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import ObjectCard from '../components/ObjectCard'
 import ShapeGrid from '../components/ShapeGrid'
 import ResponsiveImage from '../components/ResponsiveImage'
+import InSituStrip from '../components/InSituStrip'
 import objects from '../data/objects'
 
 const fade = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
@@ -248,35 +249,17 @@ export default function Home() {
         <div style={{ padding: '18px var(--gutter)', borderBottom: 'var(--rule)' }}>
           <span className="label">In situ</span>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
-          {[
-            { src: '/images/miim-i-plum-brass-insitu-terracotta-cool.jpg', caption: 'MIIM-I · Plum · Brass', credit: 'Jeanneret Chandigarh · Noguchi Akari', alt: 'MIIM-I in plum with brass base in a whitewashed room with terracotta floor' },
-            { src: '/images/miim-i-yellow-steel-insitu-walnut-cool.jpg', caption: 'MIIM-I · Signal Yellow · Steel', credit: 'Perriand Méribel · Flos Arco', alt: 'MIIM-I in signal yellow with steel base in a walnut-panelled room' },
-            { src: '/images/miim-ii-cobalt-aluminium-insitu-birch-cool.jpg', caption: 'MIIM-II · Cobalt · Aluminium', credit: 'Aalto Chair 66 · Artek Golden Bell', alt: 'MIIM-II in cobalt with aluminium base in a bright birch-and-oak room' },
-          ].map((img, i) => (
-            <motion.figure
-              key={img.src}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              style={{ margin: 0, borderLeft: i > 0 ? 'var(--rule)' : 'none' }}
-            >
-              <ResponsiveImage
-                src={img.src}
-                widths={[640, 1280, 1920]}
-                sizes="(max-width: 700px) 100vw, 34vw"
-                alt={img.alt}
-                style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', display: 'block' }}
-                loading="lazy"
-              />
-              <figcaption style={{ padding: '10px 14px', borderTop: 'var(--rule)', display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <span className="label">{img.caption}</span>
-                <span className="label" style={{ opacity: 0.6 }}>{img.credit}</span>
-              </figcaption>
-            </motion.figure>
-          ))}
-        </div>
+        <InSituStrip items={[
+          { src: '/images/miim-i-cobalt-brass-insitu-farmhouse.jpg', caption: 'MIIM-I · Cobalt · Brass', credit: 'Jeanneret Office Cane · Noguchi Akari', alt: 'MIIM-I in cobalt with brass base in a brick-and-limewash farmhouse with a limestone floor' },
+          { src: '/images/miim-ii-yellow-brass-insitu-cafe.jpg', caption: 'MIIM-II · Signal Yellow · Brass', credit: 'Mogensen J39 · Louis Poulsen PH 3/2', alt: 'MIIM-II in signal yellow with brass base in a bright Scandinavian café corner' },
+          { src: '/images/miim-i-plum-brass-insitu-terracotta-cool.jpg', caption: 'MIIM-I · Plum · Brass', credit: 'Jeanneret Chandigarh · Noguchi Akari', alt: 'MIIM-I in plum with brass base in a whitewashed room with terracotta floor' },
+          { src: '/images/miim-ii-plum-brass-insitu-terrazzo.jpg', caption: 'MIIM-II · Plum · Brass', credit: 'Muller Van Severen Alu Chair · Flos Arco', alt: 'MIIM-II in plum with brass base on a terrazzo floor with powder-blue aluminium chairs' },
+          { src: '/images/miim-i-stone-steel-insitu-canal.jpg', caption: 'MIIM-I · Stone · Steel', credit: 'Wegner CH24 · Louis Poulsen PH5', alt: 'MIIM-I in stone with steel base in an Amsterdam canal house' },
+          { src: '/images/miim-ii-cobalt-aluminium-insitu-birch-cool.jpg', caption: 'MIIM-II · Cobalt · Aluminium', credit: 'Aalto Chair 66 · Artek Golden Bell', alt: 'MIIM-II in cobalt with aluminium base in a bright birch-and-oak room' },
+          { src: '/images/miim-i-yellow-brass-insitu-birch-mvs.jpg', caption: 'MIIM-I · Signal Yellow · Brass', credit: 'Muller Van Severen Alu Chair · Artek Golden Bell', alt: 'MIIM-I in signal yellow with brass base and aluminium chairs before a birch forest' },
+          { src: '/images/miim-i-yellow-steel-insitu-walnut-v2.jpg', caption: 'MIIM-I · Signal Yellow · Steel', credit: 'Perriand Méribel · Flos Arco', alt: 'MIIM-I in signal yellow with steel base in a walnut-panelled room' },
+          { src: '/images/miim-i-yellow-brass-insitu-birch.jpg', caption: 'MIIM-I · Signal Yellow · Brass', credit: 'Aalto Chair 69 · Artek Golden Bell', alt: 'MIIM-I in signal yellow with brass base and birch chairs before a birch forest' },
+        ]} />
       </section>
 
       {/* ── CTA ────────────────────────────────────────── */}

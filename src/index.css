@@ -134,3 +134,27 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .studio-opening { grid-template-columns: 1fr; }
   .studio-opening > div { padding-bottom: 32px !important; }
 }
+
+/* In situ strip: endless horizontal scroller */
+.insitu-strip {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.insitu-strip::-webkit-scrollbar { display: none; }
+.insitu-track { display: flex; width: max-content; }
+.insitu-item {
+  margin: 0;
+  width: clamp(300px, 34vw, 560px);
+  flex: 0 0 auto;
+  border-right: var(--rule);
+}
+.insitu-item figcaption {
+  padding: 10px 14px;
+  border-top: var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+@media (max-width: 700px) { .insitu-item { width: 85vw; } }

@@ -98,8 +98,9 @@ export default function Archive() {
       >
         <div style={{ overflow: 'hidden' }}>
           <ResponsiveImage
-            src="/images/miim-i-cobalt-brass-canal.jpg"
-            alt="MIIM-I in cobalt with brass base"
+            src="/images/miim-i-plum-brass-insitu-paris.jpg"
+            widths={[640, 1280, 1920, 2880]}
+            alt="MIIM-I in plum with brass base in a Parisian apartment with Cesca chairs and an Arco lamp"
             style={{ width: '100%', display: 'block', marginTop: '-12%' }}
             loading="lazy"
           />
