@@ -123,3 +123,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     display: none !important;
   }
 }
+
+/* Studio opening: text on the gutter, image flush to the right edge and the bottom rule */
+.studio-opening {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 45%);
+  align-items: end;
+}
+@media (max-width: 900px) {
+  .studio-opening { grid-template-columns: 1fr; }
+  .studio-opening > div { padding-bottom: 32px !important; }
+}
