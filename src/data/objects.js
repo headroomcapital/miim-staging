@@ -107,7 +107,7 @@ const objects = [
         { key: 'frontal', label: 'Frontal' },
         { key: 'angle', label: 'Angled' },
       ],
-      src: (color, base, view) => `/images/miim-ii-${color}-${base}-detail-${view}.jpg`,
+      src: (color, base, view) => `/images/miim-ii-${color}-${base}-detail-${view}${base === 'brass' ? '-b2' : ''}.jpg`,
     },
   },
 ]

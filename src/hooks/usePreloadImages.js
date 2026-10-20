@@ -5,9 +5,9 @@ const RESPONSIVE_IMAGES = {
     widths: [640, 1280, 1920, 2880],
     base: '/images/responsive/miim-i-cobalt-brass-library-v2',
   },
-  '/images/miim-i-plum-brass-insitu-paris.jpg': {
+  '/images/miim-i-plum-brass-insitu-paris-v2.jpg': {
     widths: [640, 1280, 1920, 2880],
-    base: '/images/responsive/miim-i-plum-brass-insitu-paris',
+    base: '/images/responsive/miim-i-plum-brass-insitu-paris-v2',
   },
   '/images/miim-i-series-group.jpg': {
     widths: [640, 1280, 1920],
@@ -19,7 +19,7 @@ const RESPONSIVE_IMAGES = {
 const ROUTE_IMAGES = {
   '/inquiry': ['/images/miim-i-series-group.jpg'],
   '/studio': ['/images/miim-i-cobalt-brass-library-v2.jpg'],
-  '/archive': ['/images/miim-i-plum-brass-insitu-paris.jpg'],
+  '/archive': ['/images/miim-i-plum-brass-insitu-paris-v2.jpg'],
 }
 
 function getOptimalWidth() {

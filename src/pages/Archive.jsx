@@ -98,10 +98,10 @@ export default function Archive() {
       >
         <div style={{ overflow: 'hidden' }}>
           <ResponsiveImage
-            src="/images/miim-i-plum-brass-insitu-paris.jpg"
+            src="/images/miim-i-plum-brass-insitu-paris-v2.jpg"
             widths={[640, 1280, 1920, 2880]}
             alt="MIIM-I in plum with brass base in a Parisian apartment with Cesca chairs and an Arco lamp"
-            style={{ width: '100%', display: 'block', marginTop: '-12%' }}
+            style={{ width: '100%', display: 'block' }}
             loading="lazy"
           />
         </div>

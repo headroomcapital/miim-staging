@@ -266,12 +266,14 @@ export default function ObjectPage() {
           borderTop: 'var(--rule)',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: 1,
+          background: 'var(--border)',
         }}>
           {object.details.views.map((view, i) => {
             const color = object.colors.find(c => c.key === activeKey)
             const src = object.details.src(activeKey, activeBase, view.key)
             return (
-              <div key={view.key} style={{ borderLeft: i > 0 ? 'var(--rule)' : 'none' }}>
+              <div key={view.key} style={{ backgroundColor: 'var(--white)' }}>
                 <motion.div
                   key={src}
                   initial={{ opacity: 0.6 }}
@@ -313,26 +315,26 @@ export default function ObjectPage() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
+          className="object-insitu"
           style={{ borderTop: 'var(--rule)' }}
         >
+          <div style={{
+            padding: '14px var(--gutter)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 6,
+          }}>
+            <span className="label">In situ — {object.inSitu.caption}</span>
+            <span className="label" style={{ opacity: 0.6 }}>{object.inSitu.credit}</span>
+          </div>
           <ResponsiveImage
             src={object.inSitu.src}
             widths={[640, 1280, 1920, 2880]}
+            sizes="(max-width: 900px) 100vw, 50vw"
             alt={object.inSitu.alt}
-            style={{ width: '100%', aspectRatio: '4 / 3', maxHeight: '92svh', objectFit: 'cover', display: 'block' }}
+            style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', display: 'block' }}
             loading="lazy"
           />
-          <div style={{
-            padding: '10px 14px',
-            borderTop: 'var(--rule)',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            gap: '4px 16px',
-          }}>
-            <span className="label" style={{ whiteSpace: 'nowrap' }}>In situ — {object.inSitu.caption}</span>
-            <span className="label" style={{ opacity: 0.6 }}>{object.inSitu.credit}</span>
-          </div>
         </motion.section>
       )}
 
@@ -406,11 +408,7 @@ export default function ObjectPage() {
       )}
 
       {/* ── Variant image strip ────────────────────────── */}
-      <section style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        borderTop: 'var(--rule)',
-      }}>
+      <section className="variant-strip" style={{ borderTop: 'var(--rule)' }}>
         {object.colors.map((color, i) => (
           <motion.div
             key={color.key}
@@ -420,7 +418,7 @@ export default function ObjectPage() {
             transition={{ duration: 0.4, delay: i * 0.07 }}
             style={{
               cursor: 'pointer',
-              borderLeft: i > 0 ? 'var(--rule)' : 'none',
+              backgroundColor: 'var(--white)',
               opacity: activeKey === color.key ? 1 : 0.6,
               transition: 'opacity 0.3s',
             }}

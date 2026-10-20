@@ -158,3 +158,23 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   gap: 4px;
 }
 @media (max-width: 700px) { .insitu-item { width: 85vw; } }
+
+/* Product in-situ: caption beside an uncropped 4:3 image that always fits the viewport */
+.object-insitu {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);   /* image edge on the 50% line shared with the detail and variant grids */
+  align-items: end;
+}
+@media (max-width: 900px) {
+  .object-insitu { grid-template-columns: 1fr; }
+  .object-insitu > div { order: 2; border-top: var(--rule); }
+}
+
+/* Colour variants: one row of four, 1px rules drawn by the gap so every image is the same size */
+.variant-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--border);
+}
+@media (max-width: 700px) { .variant-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
