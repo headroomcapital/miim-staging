@@ -50,55 +50,57 @@ export default function Studio() {
   return (
     <motion.div {...fade} transition={{ duration: 0.3 }} className="page">
 
-      {/* Opening */}
+      {/* Opening: statement beside the studio image */}
       <section style={{
-        minHeight: '60vh',
-        display: 'flex',
-        alignItems: 'flex-end',
         padding: 'clamp(60px, 8vw, 100px) var(--gutter)',
         borderBottom: 'var(--rule)',
       }}>
-        <div style={{ maxWidth: 'var(--max)', margin: '0 auto', width: '100%' }}>
-          <motion.span
-            className="label"
+        <div style={{
+          maxWidth: 'var(--max)',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: 'clamp(32px, 5vw, 80px)',
+          alignItems: 'end',
+        }}>
+          <div>
+            <motion.span
+              className="label"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              style={{ display: 'block', marginBottom: 28 }}
+            >
+              Studio
+            </motion.span>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              style={{
+                fontSize: 'clamp(26px, 3.4vw, 48px)',
+                fontWeight: 700,
+                lineHeight: 1.15,
+              }}
+            >
+              MIIM is a design studio based in Amsterdam exploring furniture through proportion, material, and spatial balance. Objects are developed as part of systems rather than isolated pieces.
+            </motion.h1>
+          </div>
+          <motion.figure
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            style={{ display: 'block', marginBottom: 28 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            style={{ margin: 0, justifySelf: 'end', width: '100%', maxWidth: 560 }}
           >
-            Studio
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            style={{
-              fontSize: 'clamp(28px, 4.5vw, 56px)',
-              fontWeight: 700,
-              lineHeight: 1.15,
-              maxWidth: 820,
-            }}
-          >
-            MIIM is a design studio based in Amsterdam exploring furniture through proportion, material, and spatial balance. Objects are developed as part of systems rather than isolated pieces.
-          </motion.h1>
+            <ResponsiveImage
+              src="/images/miim-i-cobalt-brass-library-v2.jpg"
+              sizes="(max-width: 700px) 100vw, 560px"
+              alt="MIIM-I in cobalt with brass base in a library with a glass-block wall"
+              style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }}
+            />
+          </motion.figure>
         </div>
       </section>
-
-      {/* Full-width image */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-      >
-        <div style={{ overflow: 'hidden' }}>
-          <ResponsiveImage
-            src="/images/miim-i-cobalt-brass-library-v3.jpg"
-            alt="MIIM-I in cobalt with brass base"
-            style={{ width: '100%', display: 'block', marginTop: '-12%', marginBottom: '-5%' }}
-          />
-        </div>
-      </motion.section>
 
       {/* Four conceptual sections */}
       <section style={{
