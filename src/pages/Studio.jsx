@@ -16,7 +16,7 @@ const Section = ({ label, heading, body, index = 0 }) => (
       gridTemplateColumns: '1fr 2fr',
       gap: 'clamp(40px, 6vw, 100px)',
       padding: 'clamp(40px, 5vw, 60px) 0',
-      borderTop: 'var(--rule)',
+      borderTop: index === 0 ? 'none' : 'var(--rule)',
     }}
   >
     <div>
