@@ -1,19 +1,37 @@
 import { useEffect, useRef } from 'react'
 import ResponsiveImage from './ResponsiveImage'
 
-const SPEED = 30 // px per second
+const SPEED = 45 // px per second
 const RESUME_AFTER = 2500 // ms after the visitor stops interacting
 
 // Endless horizontal strip: drifts slowly on its own, but is a native scroller,
-// so visitors can swipe, drag-scroll or wheel through it at any time.
-export default function InSituStrip({ items }) {
+// so visitors can swipe, drag-scroll, wheel or step through it with the arrows.
+export default function InSituStrip({ items, label }) {
   const ref = useRef(null)
+  const stepRef = useRef(null)
 
   useEffect(() => {
     const el = ref.current
-    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    let raf, last = performance.now(), pausedUntil = 0, hovering = false, pos = el.scrollLeft
+    if (!el) return
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const half = () => el.scrollWidth / 2
+    let pausedUntil = 0
+    const pause = () => { pausedUntil = performance.now() + RESUME_AFTER }
+    // One image per click. Jump to the identical copy first so the smooth scroll never crosses the loop seam.
+    // Rapid clicks build on the previous target rather than the mid-animation position.
+    let target = 0, targetAt = 0
+    stepRef.current = dir => {
+      pause()
+      const w = el.querySelector('.insitu-item')?.offsetWidth ?? el.clientWidth
+      let left = performance.now() - targetAt < 700 ? target : el.scrollLeft
+      if (dir > 0 && left + w >= half()) left -= half()
+      if (dir < 0 && left - w < 0) left += half()
+      el.scrollLeft = left
+      target = left + dir * w; targetAt = performance.now()
+      el.scrollTo({ left: target, behavior: reduced ? 'auto' : 'smooth' })
+    }
+    if (reduced) return
+    let raf, last = performance.now(), hovering = false, pos = el.scrollLeft
     const tick = now => {
       const dt = Math.min(now - last, 64); last = now
       if (Math.abs(el.scrollLeft - pos) > 2) pos = el.scrollLeft   // follow any outside scroll (keys, scrollbar, momentum)
@@ -23,11 +41,11 @@ export default function InSituStrip({ items }) {
         el.scrollLeft = pos
       } else {
         pos = el.scrollLeft
-        if (pos >= half()) { pos -= half(); el.scrollLeft = pos }
+        // don't wrap while an arrow step is still animating, or it would cancel the step
+        if (pos >= half() && now - targetAt > 800) { pos -= half(); el.scrollLeft = pos }
       }
       raf = requestAnimationFrame(tick)
     }
-    const pause = () => { pausedUntil = performance.now() + RESUME_AFTER }
     let drag = null
     const down = e => {
       pause()
@@ -67,6 +85,14 @@ export default function InSituStrip({ items }) {
   }, [])
 
   return (
+    <>
+    <div className="insitu-head">
+      <span className="label">{label}</span>
+      <div>
+        <button className="label insitu-arrow" aria-label="Previous image" onClick={() => stepRef.current?.(-1)}>←</button>
+        <button className="label insitu-arrow" aria-label="Next image" onClick={() => stepRef.current?.(1)}>→</button>
+      </div>
+    </div>
     <div ref={ref} className="insitu-strip" aria-label="MIIM objects in situ">
       <div className="insitu-track">
         {[...items, ...items].map((img, i) => (
@@ -88,5 +114,6 @@ export default function InSituStrip({ items }) {
         ))}
       </div>
     </div>
+    </>
   )
 }

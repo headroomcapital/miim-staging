@@ -178,3 +178,41 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: var(--border);
 }
 @media (max-width: 700px) { .variant-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Links on the dark manifesto band: light by default, full white on hover/focus */
+.on-dark { color: rgba(247, 247, 242, 0.6); transition: color 0.2s; }
+.on-dark:hover, .on-dark:focus-visible { color: var(--white); }
+
+/* Inquiry form: persistent labels above each field */
+.field { display: flex; flex-direction: column; gap: 2px; }
+
+/* Header nav: padding gives a ~44px touch area without changing the look */
+.nav-link { display: inline-block; padding: 16px 0; }
+
+/* Footer: four across, two by two on narrow screens */
+.footer-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  align-items: center;
+}
+.footer-end { text-align: right; }
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; }
+  .footer-grid > * { overflow-wrap: anywhere; }
+}
+
+/* In-situ strip header with step arrows */
+.insitu-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 6px var(--gutter) 6px; border-bottom: var(--rule); min-height: 52px;
+}
+.insitu-arrow { color: var(--black); font-size: 15px; padding: 10px 12px; transition: opacity 0.2s; }
+.insitu-arrow:hover { opacity: 0.5; }
+.insitu-arrow:last-child { margin-right: -12px; }
+
+/* Label column + content column; stacks on phones */
+:root { --cols-label: minmax(0, 1fr) minmax(0, 2fr); }
+@media (max-width: 600px) { :root { --cols-label: minmax(0, 1fr); } }

@@ -23,6 +23,9 @@ const inputStyle = {
 export default function Inquiry() {
   const location = useLocation()
   const objectName = location.state?.object || null
+  const { color, ral, base } = location.state ?? {}
+  const version = objectName && color ? `${color}${ral ? ` (RAL ${ral})` : ''}${base ? ` · ${base}` : ''}` : null
+  const subject = objectName ? `Inquiry: ${objectName}${version ? ` — ${version}` : ''}` : null
   const [submitted, setSubmitted] = useState(false)
 
   return (
@@ -53,6 +56,12 @@ export default function Inquiry() {
                 ? `Inquiry: ${objectName}`
                 : 'Studio Access'}
             </h1>
+            {version && (
+              <div style={{ borderTop: 'var(--rule)', borderBottom: 'var(--rule)', padding: '12px 0', marginBottom: 28, maxWidth: 360 }}>
+                <span className="label" style={{ display: 'block', marginBottom: 6 }}>Selected version</span>
+                <span style={{ fontSize: 15, letterSpacing: '0.02em' }}>{objectName} — {version}</span>
+              </div>
+            )}
             <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--grey)', maxWidth: 360, marginBottom: 48 }}>
               For information about objects, commissions, or collaborations, please contact the studio.{' '}
               All inquiries are reviewed and answered directly.
@@ -91,50 +100,61 @@ export default function Inquiry() {
                 onSubmit={e => { e.preventDefault(); setSubmitted(true) }}
                 style={{ display: 'flex', flexDirection: 'column', gap: 28, maxWidth: 480 }}
               >
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  required
-                  style={inputStyle}
-                  onFocus={e => e.target.style.borderBottomColor = 'var(--black)'}
-                  onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  required
-                  style={inputStyle}
-                  onFocus={e => e.target.style.borderBottomColor = 'var(--black)'}
-                  onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
-                />
-                {objectName ? (
+                <label className="field">
+                  <span className="label">Name</span>
                   <input
                     type="text"
-                    name="subject"
-                    defaultValue={`Inquiry: ${objectName}`}
-                    readOnly
-                    style={{ ...inputStyle, color: 'var(--grey)' }}
-                  />
-                ) : (
-                  <input
-                    type="text"
-                    name="subject"
-                    placeholder="Subject — object number, commission, collaboration"
+                    name="name"
+                    autoComplete="name"
+                    required
                     style={inputStyle}
                     onFocus={e => e.target.style.borderBottomColor = 'var(--black)'}
                     onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
                   />
-                )}
-                <textarea
-                  name="message"
-                  placeholder="Message"
-                  rows={5}
-                  style={{ ...inputStyle, resize: 'vertical' }}
-                  onFocus={e => e.target.style.borderBottomColor = 'var(--black)'}
-                  onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
-                />
+                </label>
+                <label className="field">
+                  <span className="label">Email</span>
+                  <input
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    required
+                    style={inputStyle}
+                    onFocus={e => e.target.style.borderBottomColor = 'var(--black)'}
+                    onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
+                  />
+                </label>
+                <label className="field">
+                  <span className="label">Subject</span>
+                  {objectName ? (
+                    <input
+                      type="text"
+                      name="subject"
+                      defaultValue={subject}
+                      readOnly
+                      style={{ ...inputStyle, color: 'var(--grey)' }}
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      name="subject"
+                      placeholder="Object number, commission, collaboration"
+                      style={inputStyle}
+                      onFocus={e => e.target.style.borderBottomColor = 'var(--black)'}
+                      onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
+                    />
+                  )}
+                </label>
+                <label className="field">
+                  <span className="label">Message</span>
+                  <textarea
+                    name="message"
+                    rows={5}
+                    style={{ ...inputStyle, resize: 'vertical' }}
+                    onFocus={e => e.target.style.borderBottomColor = 'var(--black)'}
+                    onBlur={e => e.target.style.borderBottomColor = 'var(--border)'}
+                  />
+                </label>
                 <button
                   type="submit"
                   style={{
@@ -169,7 +189,7 @@ export default function Inquiry() {
       >
         <ResponsiveImage
           src="/images/miim-i-series-group.jpg"
-          alt="Four MIIM-I tables in Stone, Plum, Cobalt and Signal Yellow on steel and brass bases"
+          alt="Four MIIM-I tables in Stone, Plum, Cobalt and Signal Yellow on aluminium and brass bases"
           style={{ width: '100%', height: 'auto', display: 'block' }}
         />
       </motion.section>

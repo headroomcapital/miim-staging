@@ -18,7 +18,7 @@ const NavItem = ({ label, path, isActive }) => {
     >
       <Link
         to={path}
-        className="label"
+        className="label nav-link"
         style={{
           color: (hovered || isActive) ? 'var(--black)' : 'var(--grey)',
           transition: 'color 0.15s',
@@ -31,7 +31,7 @@ const NavItem = ({ label, path, isActive }) => {
         transition={{ duration: 0.2, ease: 'easeOut' }}
         style={{
           position: 'absolute',
-          bottom: -3, left: 0, right: 0,
+          bottom: 13, left: 0, right: 0,   /* 3px under the text; the link's padding is its touch area */
           height: 1,
           backgroundColor: 'var(--black)',
           display: 'block',

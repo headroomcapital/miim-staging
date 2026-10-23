@@ -43,7 +43,7 @@ export default function ObjectPage() {
     )
   }
 
-  const bases = object.bases ?? [{ key: 'steel', label: 'Steel' }, { key: 'brass', label: 'Brushed Brass' }]
+  const bases = object.bases ?? [{ key: 'aluminium', label: 'Aluminium' }, { key: 'brass', label: 'Brushed Brass' }]
   const [activeBase, setActiveBase] = useState(bases[0].key)
   const baseLabel = bases.find(b => b.key === activeBase)?.label
 
@@ -52,6 +52,9 @@ export default function ObjectPage() {
   const hasBrass = bases.length > 1 && !!object.images[imgKey(object.colors[0].key, bases[1].key)]
   const imageKey = imgKey(activeKey, activeBase)
   const heroImage = object.images[imageKey] ?? object.images[activeKey] ?? object.images.hero
+  const activeColorObj = object.colors.find(c => c.key === activeKey)
+  // Carried into the inquiry so the studio sees exactly which version was selected
+  const inquiryState = { object: object.name, color: activeColorObj?.name, ral: activeColorObj?.ral, base: baseLabel }
 
   return (
     <motion.div {...fade} transition={{ duration: 0.3 }}>
@@ -71,8 +74,8 @@ export default function ObjectPage() {
           gap: 12,
         }}>
           <div style={{ display: 'flex', gap: 20, alignItems: 'baseline' }}>
-            <span className="label mono">Object {object.number}</span>
-            <span className="label">{object.name}</span>
+            <h1 className="label" style={{ color: 'var(--black)' }}>{object.name}</h1>
+            <span className="label mono">No. {object.number}</span>
             <span className="label">{object.series}</span>
             <span className="label">{object.year}</span>
           </div>
@@ -153,7 +156,7 @@ export default function ObjectPage() {
             >
               <Link
                 to="/inquiry"
-                state={{ object: object.name }}
+                state={inquiryState}
                 style={{
                   display: 'inline-block',
                   padding: '12px 32px',
@@ -189,6 +192,8 @@ export default function ObjectPage() {
                     <button
                       key={color.key}
                       onClick={() => setActiveColor(color.key)}
+                      aria-pressed={isActive}
+                      aria-label={`${color.name}, RAL ${color.ral}`}
                       style={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -224,6 +229,7 @@ export default function ObjectPage() {
                       <button
                         key={base}
                         onClick={() => setActiveBase(base)}
+                        aria-pressed={isActive}
                         style={{
                           flex: 1,
                           padding: '10px 0',
@@ -250,12 +256,24 @@ export default function ObjectPage() {
             <span className="label" style={{ display: 'block', marginBottom: 4 }}>Specifications</span>
             <SpecRow label="Series" value={object.series} />
             <SpecRow label="Year" value={object.year} />
-            <SpecRow label="Dimensions" value={object.dimensions} />
-            <SpecRow label="Weight" value={object.weight} />
+            <SpecRow label="Dimensions (L × W × H)" value={object.dimensions} />
+            {object.weight && <SpecRow label="Weight" value={object.weight} />}
             <SpecRow label="Materials" value={object.materials} />
-            <SpecRow label="Base Materials" value={object.baseMaterials} />
+            <SpecRow label="Colour" value={`${activeColorObj?.name} · RAL ${activeColorObj?.ral}`} />
+            <SpecRow label="Columns" value={object.baseMaterials} />
             <SpecRow label="Status" value={object.status} />
             <SpecRow label="Edition" value={object.edition} />
+            <SpecRow label="Price & lead time" value="On inquiry" />
+
+            {/* Inquiry for exactly the selected version */}
+            <Link
+              to="/inquiry"
+              state={inquiryState}
+              className="label"
+              style={{ display: 'inline-block', marginTop: 20, color: 'var(--black)', borderBottom: '1px solid var(--black)', paddingBottom: 3 }}
+            >
+              Inquire about this version: {activeColorObj?.name} · {baseLabel} →
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -348,7 +366,7 @@ export default function ObjectPage() {
             maxWidth: 'var(--max)',
             margin: '0 auto',
             display: 'grid',
-            gridTemplateColumns: '1fr 2fr',
+            gridTemplateColumns: 'var(--cols-label)',
             gap: 'clamp(40px, 6vw, 100px)',
           }}>
             <div>
@@ -447,7 +465,7 @@ export default function ObjectPage() {
           maxWidth: 'var(--max)',
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: '1fr 2fr',
+          gridTemplateColumns: 'var(--cols-label)',
           gap: 'clamp(40px, 6vw, 100px)',
         }}>
           <span className="label" style={{ paddingTop: 3 }}>Series Note</span>

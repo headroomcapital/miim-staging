@@ -6,14 +6,7 @@ export default function Footer() {
       borderTop: 'var(--rule)',
       padding: '28px var(--gutter)',
     }}>
-      <div style={{
-        maxWidth: 'var(--max)',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: 20,
-        alignItems: 'center',
-      }}>
+      <div className="footer-grid">
         <span className="label">MIIM — Spatial Harmony</span>
         <span className="label">Amsterdam, NL</span>
         <a href="mailto:info@miim.nu" className="label" style={{ color: 'var(--grey)', transition: 'color 0.2s' }}
@@ -22,7 +15,7 @@ export default function Footer() {
         >
           info@miim.nu
         </a>
-        <span className="label" style={{ textAlign: 'right' }}>© 2026</span>
+        <span className="label footer-end">© 2026</span>
       </div>
     </footer>
   )

@@ -9,6 +9,9 @@ import objects from '../data/objects'
 
 const fade = { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
 
+// Every colour × base combination of every object
+const versions = objects.reduce((n, o) => n + o.colors.length * (o.bases?.length ?? 1), 0)
+
 const markStyle = {
   fontFamily: 'var(--font-display)',
   fontSize: 'clamp(86px, 24.3vw, 360px)',
@@ -56,7 +59,7 @@ export default function Home() {
         <ShapeGrid color="#C5C2BC" />
 
         <motion.div style={{ scale, opacity, y, width: '100%', position: 'relative', zIndex: 1, pointerEvents: 'none' }}>
-          <span style={markStyle}>MIIM</span>
+          <h1 style={markStyle} aria-label="MIIM — Spatial Harmony, furniture studio">MIIM</h1>
         </motion.div>
 
         {/* Meta labels */}
@@ -82,7 +85,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.5 }}
           >
-            001–003
+            001–002
           </motion.span>
         </div>
       </section>
@@ -98,7 +101,7 @@ export default function Home() {
           padding: '20px var(--gutter)',
           borderBottom: 'var(--rule)',
         }}>
-          <span className="label">Object Archive / I-Series / {objects.length} Objects</span>
+          <span className="label">Object Archive / I-Series / {objects.length} Objects · {versions} Versions</span>
           <Link to="/archive" className="label" style={{ color: 'var(--black)', transition: 'opacity 0.2s' }}
             onMouseEnter={e => e.target.style.opacity = 0.5}
             onMouseLeave={e => e.target.style.opacity = 1}
@@ -175,10 +178,8 @@ export default function Home() {
           >
             <Link
               to="/studio"
-              className="label"
-              style={{ color: 'var(--grey)', borderBottom: '1px solid var(--grey)', paddingBottom: 3, transition: 'color 0.2s, border-color 0.2s' }}
-              onMouseEnter={e => { e.target.style.color = 'var(--white)'; e.target.style.borderColor = 'var(--white)' }}
-              onMouseLeave={e => { e.target.style.color = 'var(--grey)'; e.target.style.borderColor = 'var(--grey)' }}
+              className="label on-dark"
+              style={{ borderBottom: '1px solid currentColor', paddingBottom: 3 }}
             >
               Studio →
             </Link>
@@ -195,7 +196,7 @@ export default function Home() {
           maxWidth: 'var(--max)',
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: '1fr 2fr',
+          gridTemplateColumns: 'var(--cols-label)',
           gap: 'clamp(40px, 6vw, 120px)',
           alignItems: 'start',
         }}>
@@ -223,9 +224,10 @@ export default function Home() {
               maxWidth: 540,
             }}>
               The I-Series studies a single spatial proposition:<br />
-              a horizontal surface supported by two vertical cylinders.<br /><br />
-              The cylinders remain constant.<br />
-              The surface changes in scale and proportion.<br /><br />
+              a horizontal surface resting on vertical columns.<br /><br />
+              The principle remains constant.<br />
+              The surface changes in scale, proportion and colour;<br />
+              the columns in number and material.<br /><br />
               Individually, each object completes a space.<br />
               Together, the objects reveal the system behind them.
             </p>
@@ -246,18 +248,15 @@ export default function Home() {
 
       {/* ── In situ gallery ─────────────────────────────── */}
       <section style={{ borderTop: 'var(--rule)' }}>
-        <div style={{ padding: '18px var(--gutter)', borderBottom: 'var(--rule)' }}>
-          <span className="label">In situ</span>
-        </div>
-        <InSituStrip items={[
+        <InSituStrip label="In situ" items={[
           { src: '/images/miim-i-cobalt-brass-insitu-farmhouse.jpg', caption: 'MIIM-I · Cobalt · Brass', credit: 'Jeanneret Office Cane · Noguchi Akari', alt: 'MIIM-I in cobalt with brass base in a brick-and-limewash farmhouse with a limestone floor' },
           { src: '/images/miim-ii-yellow-brass-insitu-cafe.jpg', caption: 'MIIM-II · Signal Yellow · Brass', credit: 'Mogensen J39 · Louis Poulsen PH 3/2', alt: 'MIIM-II in signal yellow with brass base in a bright Scandinavian café corner' },
           { src: '/images/miim-i-plum-brass-insitu-terracotta-cool.jpg', caption: 'MIIM-I · Plum · Brass', credit: 'Jeanneret Chandigarh · Noguchi Akari', alt: 'MIIM-I in plum with brass base in a whitewashed room with terracotta floor' },
           { src: '/images/miim-ii-plum-brass-insitu-terrazzo.jpg', caption: 'MIIM-II · Plum · Brass', credit: 'Muller Van Severen Alu Chair · Flos Arco', alt: 'MIIM-II in plum with brass base on a terrazzo floor with powder-blue aluminium chairs' },
-          { src: '/images/miim-i-stone-steel-insitu-canal.jpg', caption: 'MIIM-I · Stone · Steel', credit: 'Wegner CH24 · Louis Poulsen PH5', alt: 'MIIM-I in stone with steel base in an Amsterdam canal house' },
+          { src: '/images/miim-i-stone-aluminium-insitu-canal.jpg', caption: 'MIIM-I · Stone · Aluminium', credit: 'Wegner CH24 · Louis Poulsen PH5', alt: 'MIIM-I in stone with aluminium base in an Amsterdam canal house' },
           { src: '/images/miim-ii-cobalt-aluminium-insitu-birch-cool.jpg', caption: 'MIIM-II · Cobalt · Aluminium', credit: 'Aalto Chair 66 · Artek Golden Bell', alt: 'MIIM-II in cobalt with aluminium base in a bright birch-and-oak room' },
           { src: '/images/miim-i-yellow-brass-insitu-birch-mvs.jpg', caption: 'MIIM-I · Signal Yellow · Brass', credit: 'Muller Van Severen Alu Chair · Artek Golden Bell', alt: 'MIIM-I in signal yellow with brass base and aluminium chairs before a birch forest' },
-          { src: '/images/miim-i-yellow-steel-insitu-walnut-v3.jpg', caption: 'MIIM-I · Signal Yellow · Steel', credit: 'Perriand Méribel · Flos Arco', alt: 'MIIM-I in signal yellow with steel base in a walnut-panelled room' },
+          { src: '/images/miim-i-yellow-aluminium-insitu-walnut-v3.jpg', caption: 'MIIM-I · Signal Yellow · Aluminium', credit: 'Perriand Méribel · Flos Arco', alt: 'MIIM-I in signal yellow with aluminium base in a walnut-panelled room' },
         ]} />
       </section>
 

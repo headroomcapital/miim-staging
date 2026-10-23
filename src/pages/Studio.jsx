@@ -13,7 +13,7 @@ const Section = ({ label, heading, body, index = 0 }) => (
     transition={{ duration: 0.4, delay: index * 0.08 }}
     style={{
       display: 'grid',
-      gridTemplateColumns: '1fr 2fr',
+      gridTemplateColumns: 'var(--cols-label)',
       gap: 'clamp(40px, 6vw, 100px)',
       padding: 'clamp(40px, 5vw, 60px) 0',
       borderTop: index === 0 ? 'none' : 'var(--rule)',
@@ -122,7 +122,7 @@ export default function Studio() {
           index={3}
           label="Materials with Integrity"
           heading="Materials are chosen for their structural clarity and durability."
-          body="Solid brass maintains precise geometry over time. Lacquered surfaces create a stable spatial plane. Used in their purest form, these materials allow the structure of the object to remain visible."
+          body="Columns are rolled from brass or aluminium sheet and finished with a brushed surface. Tops are lacquered MDF in four RAL colours, a stable spatial plane. Used in their purest form, these materials allow the structure of the object to remain visible."
         />
       </section>
 

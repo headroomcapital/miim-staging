@@ -79,7 +79,7 @@ export default function Archive() {
           maxWidth: 'var(--max)',
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: '1fr 2fr',
+          gridTemplateColumns: 'var(--cols-label)',
           gap: 'clamp(40px, 6vw, 100px)',
         }}>
           <span className="label" style={{ paddingTop: 3 }}>I-Series Note</span>
