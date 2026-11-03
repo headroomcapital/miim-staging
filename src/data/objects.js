@@ -44,6 +44,7 @@ const objects = [
       { key: 'aluminium', label: 'Aluminium' },
       { key: 'brass', label: 'Brushed Brass' },
     ],
+    heroWidths: [1280, 1920, 2880, 3840, 4800],   // wide hero files for the current image set go up to 4800
     thumbnail: '/images/miim-i-yellow-aluminium-v2.jpg',
     inSitu: {
       src: '/images/miim-i-plum-brass-insitu-terracotta-cool.jpg',
@@ -100,6 +101,7 @@ const objects = [
       cobalt_brass: '/images/miim-ii-cobalt-brass-v2.jpg',
       plum_brass: '/images/miim-ii-plum-brass-v2.jpg',
     },
+    heroWidths: [1280, 1920, 2880, 3840, 4800],   // wide hero files for the current image set go up to 4800
     thumbnail: '/images/miim-ii-stone-aluminium-v3.jpg',
     inSitu: {
       src: '/images/miim-ii-plum-brass-insitu-kitchen-v2.jpg',

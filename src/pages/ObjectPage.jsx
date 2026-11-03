@@ -108,7 +108,7 @@ export default function ObjectPage() {
           <source
             type="image/webp"
             sizes="170vw"
-            srcSet={[1280, 1920, 2880].map(w => `${heroImage.replace('/images/', '/images/responsive/').replace(/\.jpg$/, '')}-wide-${w}.webp ${w}w`).join(', ')}
+            srcSet={(object.heroWidths ?? [1280, 1920, 2880]).map(w => `${heroImage.replace('/images/', '/images/responsive/').replace(/\.jpg$/, '')}-wide-${w}.webp ${w}w`).join(', ')}
           />
           <img
             src={heroImage.replace(/\.jpg$/, '-wide.jpg')}

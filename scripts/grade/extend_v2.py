@@ -6,8 +6,9 @@
 # Object matte = union of silhouette-edge masks over each object's 8 images (objmask_v2.py).
 import sys; sys.path.insert(0,'.')
 from common import *
-import numpy as np; from PIL import Image
-ASPECT=2.4; FALL=500; R_LOW=40; XF=80
+import numpy as np, os; from PIL import Image
+Image.MAX_IMAGE_PIXELS=None
+ASPECT=2.4; FALL0=500; R_LOW0=40; XF0=80     # tuned at 1920 wide; scaled with the source width
 def ld(f): return np.asarray(Image.open(f).convert('RGB'),dtype=np.float32)/255
 def vblur(a,r):
     k=np.exp(-np.arange(-3*r,3*r+1)**2/(2*r*r)); k/=k.sum()
@@ -29,14 +30,16 @@ def synth(patch,shape,rng):
 def mirror_idx(n,m): j=np.arange(n)%(2*m); return np.where(j<m,j,2*m-1-j)
 def extend(f):
     rng=np.random.default_rng(7)
-    lab=rgb2lab(ld(f)); H,W=lab.shape[:2]; p=(round(H*ASPECT)-W)//2
-    obj=np.load('matte_I_v2.npy' if '/miim-i-' in f else 'matte_II_v2.npy')
+    lab=rgb2lab(ld(f)); H,W=lab.shape[:2]; p=(round(H*ASPECT)-W)//2; k=W/1920
+    FALL,R_LOW,XF=FALL0*k,round(R_LOW0*k),round(XF0*k)
+    m=np.load('matte_I_v2.npy' if os.path.basename(f).startswith('miim-i-') else 'matte_II_v2.npy')
+    obj=np.asarray(Image.fromarray(m.astype(np.uint8)*255).resize((W,H),Image.NEAREST))>127
     rows=np.nonzero(obj.any(1))[0]; cols=np.nonzero(obj.any(0))[0]
     bg=~obj; tgt=np.array([lab[y][bg[y]].mean(0) if bg[y].any() else lab[y].mean(0) for y in range(H)])
     g=np.abs(np.diff(np.convolve(tgt[:,0],np.ones(9)/9,'same'))); hz=int(np.argmax(g[50:-50])+50)+1
-    tgt=np.concatenate([vblur(tgt[:hz],30),vblur(tgt[hz:],30)],0); tgt=vblur(tgt,R_LOW//2)
+    tgt=np.concatenate([vblur(tgt[:hz],round(30*k)),vblur(tgt[hz:],round(30*k))],0); tgt=vblur(tgt,R_LOW//2)
     low=np.stack([blur2(lab[...,c],R_LOW) for c in range(3)],-1); det=lab-low   # grain + mottling
-    wt=max(rows.min()-30,60); fb=min(rows.max()+30,H-60)
+    wt=max(rows.min()-round(30*k),60); fb=min(rows.max()+round(30*k),H-60)
     wall_src=det[30:wt]; floor_src=det[fb:H-10]
     out=np.zeros((H,W+2*p,3),np.float32); out[:,p:p+W]=lab
     for side in ('L','R'):
@@ -50,6 +53,7 @@ def extend(f):
         ext=base+near*w+tex*(1-w)
         if side=='L': out[:,:p]=ext[:,::-1]
         else: out[:,p+W:]=ext
-    o=f.rsplit('.',1)[0]+'-wide.png'
+    o=os.path.join(OUT,os.path.basename(f).rsplit('.',1)[0]+'-wide.png')
     Image.fromarray((np.clip(lab2rgb(out),0,1)*255+0.5).astype(np.uint8)).save(o); return o,hz,wt,fb
+OUT=os.environ.get('WIDE_OUT','out/v2')
 for f in sys.argv[1:]: print(*extend(f))
